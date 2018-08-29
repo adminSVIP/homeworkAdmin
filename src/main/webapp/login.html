@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!-- Meta, title, CSS, favicons, etc. -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Gentelella Alela! | </title>
+
+  <script src="vendors/jquery/dist/jquery.min.js"></script>
+  <!-- Bootstrap -->
+  <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <!-- NProgress -->
+  <link href="vendors/nprogress/nprogress.css" rel="stylesheet">
+  <!-- Animate.css -->
+  <link href="vendors/animate.css/animate.min.css" rel="stylesheet">
+
+  <!-- Custom Theme Style -->
+  <link href="build/css/custom.min.css" rel="stylesheet">
+
+</head>
+
+<body class="login">
+  <div>
+    <a class="hiddenanchor" id="signup"></a>
+    <a class="hiddenanchor" id="signin"></a>
+
+    <div class="login_wrapper">
+      <div class="animate form login_form">
+        <section class="login_content">
+          <form>
+            <h1>管理员登陆</h1>
+            <div>
+              <input type="text" class="form-control" name='nike' placeholder="用户名" required="required" />
+            </div>
+            <div>
+              <input type="password" class="form-control" name="password" placeholder="密码" required="required" />
+            </div>
+            <div>
+              <!-- <a class="btn btn-default submit" >登陆</a> -->
+              <div class="btn btn-default submit">登陆</div>
+              <!-- <a class="reset_pass" href="#">忘记密码?</a> -->
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="separator">
+              <!-- <p class="change_link">还没有账号 ?
+                  <a href="#signup" class="to_register"> 创建账号 </a>
+                </p> -->
+
+              <div class="clearfix"></div>
+              <br />
+
+              <div>
+                <h1>
+                  <i class="fa fa-paw"></i> Gentelella Alela!</h1>
+                <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
+              </div>
+            </div>
+          </form>
+        </section>
+      </div>
+
+      <!-- <div id="register" class="animate form registration_form">
+          <section class="login_content">
+            <form>
+              <h1>注册账号</h1>
+              <div>
+                <input type="text" class="form-control" placeholder="Username" required="" />
+              </div>
+              <div>
+                <input type="email" class="form-control" placeholder="Email" required="" />
+              </div>
+              <div>
+                <input type="password" class="form-control" placeholder="Password" required="" />
+              </div>
+              <div>
+                <a class="btn btn-default submit" href="index.html">提交</a>
+              </div>
+
+              <div class="clearfix"></div>
+
+              <div class="separator">
+                <p class="change_link">已有账号 ?
+                  <a href="#signin" class="to_register"> 登陆 </a>
+                </p>
+
+                <div class="clearfix"></div>
+                <br />
+
+                <div>
+                  <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
+                  <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
+                </div>
+              </div>
+            </form>
+          </section>
+        </div> -->
+    </div>
+  </div>
+</body>
+<script>
+  $(function () {
+
+    $("div.submit").click(function () {
+      var nike = $("input[name='nike']").val();
+      var password = $("input[name='password']").val();
+      if (nike == "" || password == "") return;
+      $.ajax({
+        url: "loginxx",
+        type: "POST",
+        data: '{"nike":"' + nike + '","password":"' + password + '"}',
+        contentType: "application/json;charset=utf-8",
+        success: function (data) {
+          data = eval("(" + data + ")");
+          if(data.state == "ok"){
+            window.location.href='index.jsp';
+          }else{
+            alert("登陆失败");
+          }
+        }
+      });
+    })
+
+  })
+</script>
+
+</html>
