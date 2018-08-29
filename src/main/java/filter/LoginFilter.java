@@ -20,12 +20,13 @@ public class LoginFilter implements Filter {
 	private boolean canIgnore(HttpServletRequest request) {
 		String url = request.getRequestURI();
 		for (String ignore : prefixIignores) {
-			if(url.matches("[a-zA-Z/]*product/select*")) {
-				return true;
-			}
-			if (url.endsWith(ignore)) {
-				return true;
-			}
+			if(url.matches("[a-zA-Z/]*product/select*"))return true;
+			if(url.matches("[a-zA-Z/]*user/select*"))return true;
+			if(url.matches("[a-zA-Z/]*user/login"))return true;
+			if(url.matches("[a-zA-Z/]*user/regist"))return true;
+			if(url.matches("[a-zA-Z/]*user/currUser"))return true;
+			 
+			if (url.endsWith(ignore)) return true;
 		}
 		return false;
 	}

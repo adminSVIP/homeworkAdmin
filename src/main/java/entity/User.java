@@ -1,7 +1,11 @@
 package entity;
 
+import util.md5;
+
 public class User {
 	private int id;
+	private String nike;
+	
 	private String email;
 	private String password;
 	private String tel;
@@ -9,13 +13,31 @@ public class User {
 	private Double amount;
 	private int status;
 	private String comments;
+	private String md5Pass;
 	
 	
 	
+
 	public User() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
+	
+	public String getNike() {
+		return nike;
+	}
+	public void setNike(String nike) {
+		this.nike = nike;
+	}
+	
+	
+	public String getMd5Pass() {
+		return md5.toMd5(password);
+	}
+
+	public void setMd5Pass(String md5Pass) {
+		this.md5Pass = md5Pass;
+	}
+	
 	public int getId() {
 		return id;
 	}
