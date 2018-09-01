@@ -30,4 +30,7 @@ public interface OrdersDao {
 	
 	@Delete("delete orders where id = #{id}")
 	public int delete(int id);
+	
+	@Select("SELECT LAST_INSERT_ID()")
+	public int lastID ();
 }

@@ -7,7 +7,7 @@ public class Orders_detail {
 	private int count;
 	private Double price;
 	private Double nowprice;
-	private String comments;
+	private String comments = "";
 	
 	
 	public Orders_detail() {

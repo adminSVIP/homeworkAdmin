@@ -4,7 +4,7 @@ public class Orders_status {
 	private int id;
 	private int orders_id;
 	private String date;
-	private int dest_status;
+	private int dest_status=1;
 	private String info="";
 	private int num=0;
 	private Double amount =0.0;

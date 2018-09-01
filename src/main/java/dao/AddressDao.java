@@ -14,15 +14,18 @@ import entity.User;
 
 @Repository
 public interface AddressDao {
-	@Select("select * from user")
+	@Select("select * from address")
 	public List<Address> select();
 	
-	@Insert("insert into user(user_id,zone,addr,name,tel,status) "
+	@Select("select * from address where user_id = #{id}")
+	public List<Address> getUserAddress(int id);
+	
+	@Insert("insert into address(user_id,zone,addr,name,tel,status) "
 			+ "values(#{user_id},#{zone},#{addr},#{name},"
 			+ "#{tel},#{status})")
 	public int insert(Address address);
 	
-	@Update("update user set user_id = #{user_id} , "
+	@Update("update address set user_id = #{user_id} , "
 			+ "zone = #{zone},addr=#{addr},name=#{name},"
 			+ "tel = #{tel}, status = #{status},"
 			+ " where id = #{id} ")

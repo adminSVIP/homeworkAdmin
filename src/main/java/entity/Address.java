@@ -7,7 +7,7 @@ public class Address {
 	private String addr;
 	private String name;
 	private String tel;
-	private int status;
+	private int status=1;
 	
 	
 	

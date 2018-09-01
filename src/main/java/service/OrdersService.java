@@ -4,7 +4,6 @@ import java.util.List;
 
 import entity.Orders;
 import entity.OrdersSearchInfo;
-import entity.SearchInfo;
 
 public interface OrdersService {
 	public List select(OrdersSearchInfo searchInfo);

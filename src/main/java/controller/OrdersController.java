@@ -19,6 +19,8 @@ import entity.Operator;
 import entity.Orders;
 import entity.OrdersSearchInfo;
 import entity.Orders_status;
+import entity.User;
+import service.MyTranstionService;
 import service.OrdersService;
 import service.OrdersStatusService;
 import util.JsonUnit;
@@ -30,6 +32,8 @@ public class OrdersController {
 	OrdersService  ordersService;
 	@Autowired
 	OrdersStatusService ordersStatusService;
+	@Autowired
+	MyTranstionService myTranstionService;
 	
 	@RequestMapping("select")
 	@ResponseBody
@@ -61,6 +65,19 @@ public class OrdersController {
 		int rsRow = ordersService.insert(orders);
 		return "{\"rs\":\""+ rsRow +"\"}";
 	}
+	
+	
+	@RequestMapping("order")
+	@ResponseBody
+	public void order(@RequestBody HashMap<String, Object> map,HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		map.put("user_id",user.getId());
+		
+		myTranstionService.orderTranstion(map);
+		
+	}
+	
+	
 	
 	@RequestMapping("update")
 	@ResponseBody

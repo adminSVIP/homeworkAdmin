@@ -10,8 +10,8 @@ public class Orders {
 	private int address_id;
 	private int user_id;
 	private int status;
-	private String comments;
-	private int assessstatus;
+	private String comments="";
+	private int assessstatus=0;
 	
 	
 	

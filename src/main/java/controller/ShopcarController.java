@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import entity.SearchInfo;
 import entity.Shopcar;
+import entity.User;
 import service.ShopcarService;
 
 @Controller
@@ -65,4 +66,12 @@ public class ShopcarController {
 		return "{\"rs\":\""+ rsRow +"\"}";
 	}
 	
+	@RequestMapping("myShopcars")
+	@ResponseBody
+	public List<HashMap<String, Object>> myShopcars(HttpServletRequest req) {
+		System.out.println(req.getSession().getId());
+		User user = (User) req.getSession().getAttribute("user");
+		if(user==null)return null;
+		return shopcarService.myShopcar(user.getId());
+	}
 }

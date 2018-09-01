@@ -1,10 +1,12 @@
 package service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import entity.Operator;
 import entity.SearchInfo;
 import entity.Shopcar;
+import entity.ShopcarSearchInfo;
 
 public interface ShopcarService {
 
@@ -14,7 +16,8 @@ public interface ShopcarService {
 
 	public int update(Shopcar shopcar);
 
-	public int delete(int id);
+	public int delete(ShopcarSearchInfo shopcarSearchInfo);
 	
+	public List<HashMap<String, Object>> myShopcar(int id);
 	
 }

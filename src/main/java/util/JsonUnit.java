@@ -23,7 +23,10 @@ public class JsonUnit {
 		return toString(new jsonInfo(status,text));
 	}
 	
-	public  static class jsonInfo{
+	
+	
+	
+ 	public  static class jsonInfo{
 		int status;
 		String text;
 		public jsonInfo(int status, String text) {
