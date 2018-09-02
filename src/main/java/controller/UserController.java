@@ -55,9 +55,7 @@ public class UserController {
 	@RequestMapping("currUser")
 	@ResponseBody
 	public User currentUser(HttpServletRequest req,HttpServletResponse response) {
-		System.out.println(req.getSession().getId());
 		User user = (User) req.getSession().getAttribute("user");
-		System.out.println(user);
 		return user;
 	}
 	
@@ -84,9 +82,7 @@ public class UserController {
 	@RequestMapping("login")
 	@ResponseBody
 	public String canLogin(@RequestBody(required=true)User user,HttpServletRequest req,HttpServletResponse response) {
-		System.out.println(req.getSession().getId());
 		 
-		System.out.println(user.getEmail()+":ÓÊÏä");
 		List list = userService.canLogin(user);
 		if(list.size()>0) {
 			req.getSession().setAttribute("user", list.get(0));

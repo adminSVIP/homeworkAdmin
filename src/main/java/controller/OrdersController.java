@@ -15,11 +15,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import entity.Assess;
 import entity.Operator;
 import entity.Orders;
 import entity.OrdersSearchInfo;
 import entity.Orders_status;
 import entity.User;
+import service.AssessService;
 import service.MyTranstionService;
 import service.OrdersService;
 import service.OrdersStatusService;
@@ -30,6 +32,9 @@ import util.JsonUnit;
 public class OrdersController {
 	@Autowired
 	OrdersService  ordersService;
+	@Autowired
+	AssessService assessService;
+	
 	@Autowired
 	OrdersStatusService ordersStatusService;
 	@Autowired
@@ -69,14 +74,21 @@ public class OrdersController {
 	
 	@RequestMapping("order")
 	@ResponseBody
-	public void order(@RequestBody HashMap<String, Object> map,HttpSession session) {
+	public String order(@RequestBody HashMap<String, Object> map,HttpSession session) {
 		User user = (User) session.getAttribute("user");
 		map.put("user_id",user.getId());
 		
-		myTranstionService.orderTranstion(map);
+		return myTranstionService.orderTranstion(map);
 		
 	}
-	
+	@RequestMapping("userOrders")
+	@ResponseBody
+	public List<HashMap<String,Object>> userOrders(HttpSession session){
+		User user = (User) session.getAttribute("user");
+		if(user==null)return null;
+		return ordersService.userOrders(user.getId());
+		
+	}
 	
 	
 	@RequestMapping("update")
@@ -112,6 +124,52 @@ public class OrdersController {
 		return "{\"state\":\"false\"}";
 	}
 	
+	@RequestMapping("recivePackage")
+	@ResponseBody
+	public String recivePackage(@RequestBody(required=true)  Map<String,Object> map,HttpServletRequest req) {
+		System.out.println(map.get("data").toString());
+		String id = map.get("data").toString();
+		int status = Integer.valueOf(map.get("status").toString());
+		OrdersSearchInfo searchInfo = new OrdersSearchInfo();
+		searchInfo.setSearchType(1);
+		searchInfo.setWhere(id);
+		Orders orders = (Orders) ordersService.select(searchInfo).get(0);
+		orders.setStatus(status);
+		String comments = map.get("comments").toString();
+		int rsRow = ordersService.update(orders);
+		Orders_status orders_status = new Orders_status();
+		SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		orders_status.setDate(f.format(new Date()));
+		orders_status.setOrders_id(orders.getId());
+		orders_status.setComments(comments);
+		orders_status.setDest_status(orders.getStatus());
+		ordersStatusService.insert(orders_status); 
+		if(rsRow > 0) { 
+			return "{\"state\":\"ok\",\"code\":\""+ orders.getStatus() +"\"}";
+		}
+		return "{\"state\":\"false\"}";
+	}
+	
+	@RequestMapping("assess")
+	@ResponseBody
+	public String assessOrders(@RequestBody(required=true) Assess assess,HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		if(user==null)return "{\"state\":\"false\"}";
+		System.out.println(assess.getInfo());
+		assess.setUser_id(user.getId());
+		int orderid = assess.getOrders_id();
+		assessService.insert(assess);
+		OrdersSearchInfo searchInfo = new OrdersSearchInfo();
+		searchInfo.setSearchType(1);
+		searchInfo.setWhere(orderid+"");
+		Orders orders = (Orders) ordersService.select(searchInfo).get(0);
+		orders.setAssessstatus(1);
+		int rsRow = ordersService.update(orders);
+		if(rsRow > 0) { 
+			return "{\"state\":\"ok\"}";
+		}
+		return "{\"state\":\"false\"}";
+	}
 	
 }
 

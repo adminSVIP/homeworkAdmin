@@ -32,8 +32,8 @@ public class AddressServiceImpl implements AddressService {
 	}
 
 	public int delete(int id) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return addressDao.delete(id);
 	}
 
 }

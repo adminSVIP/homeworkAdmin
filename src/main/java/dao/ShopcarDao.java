@@ -31,7 +31,7 @@ public interface ShopcarDao {
 	@Delete("delete from shopcar where id in (${where})")
 	public int delete(ShopcarSearchInfo shopcarSearchInfo);
 	
-	@Select("select p.*,c.user_id,c.id cid from shopcar c join product p on(c.product_id = p.id) where c.user_id = #{id}")
+	@Select("select p.*,c.user_id,c.id cid,c.count from shopcar c join product p on(c.product_id = p.id) where c.user_id = #{id}")
 	@Results({ 
 		@Result(property="cid", column="c.id")
 	})

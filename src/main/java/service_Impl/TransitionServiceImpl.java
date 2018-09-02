@@ -21,11 +21,13 @@ import dao.ShopcarDao;
 import entity.Orders;
 import entity.Orders_detail;
 import entity.Orders_status;
+import entity.Product;
+import entity.ProductSearchInfo;
 import entity.ShopcarSearchInfo;
 import service.MyTranstionService;
 import util.JsonUnit;
 
-@Service
+@Service  
 public class TransitionServiceImpl implements MyTranstionService {
 	public SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	@Autowired
@@ -42,19 +44,14 @@ public class TransitionServiceImpl implements MyTranstionService {
 	OrdersDetailDao ordersDetailDao;
 	
 	@Transactional(transactionManager="transactionManager")
-	public void orderTranstion(HashMap<String, Object> map) {
+	public String orderTranstion(HashMap<String, Object> map) {
 		//解析数据
 		Orders orders = JsonUnit.toObject(JsonUnit.toString(map.get("order")), Orders.class);
 		orders.setUser_id(Integer.valueOf(map.get("user_id").toString()));
 		String date = format.format(new Date());
-		String code = "order"+System.currentTimeMillis();
-		orders.setCode(code);
-		orders.setDate(date);
-		//插入订单
-		ordersDao.insert(orders);
 		
-		int lastId = ordersDao.lastID();
-		//throw new RuntimeException();
+		orders.setDate(date);
+
 		//解析订单中的商品信息
 		ObjectMapper mapper = new ObjectMapper();
 		List<Orders_status> list = new ArrayList<Orders_status>();
@@ -75,24 +72,57 @@ public class TransitionServiceImpl implements MyTranstionService {
 			throw new RuntimeException();
 		}
 		
-		System.out.println(payShopcarIds);
+		
 		ShopcarSearchInfo shopcarSearchInfo = new ShopcarSearchInfo();
 		shopcarSearchInfo.setWhere(payShopcarIds);
 		shopcarDao.delete(shopcarSearchInfo);
 		
-		
-		for (Orders_detail orders_detail : detailList) {
+		for(int i = 0 ; i < detailList.size() ; i++) {
+			String code = "order"+System.currentTimeMillis();
+			Orders_detail orders_detail = detailList.get(i);
+			
+			
+			orders.setCode(code);
+			orders.setAmount(orders_detail.getPrice());
+			orders.setNowamount(orders_detail.getNowprice());
+			ordersDao.insert(orders);
+			int lastId = ordersDao.lastID();
+			lastId = ordersDao.lastID();
+			
+			
 			orders_detail.setOrders_id(lastId);
 			ordersDetailDao.insert(orders_detail);
-		}
-		for (Orders_status orders_status : list) {
+			
+			ProductSearchInfo productSearchInfo = new ProductSearchInfo();
+			productSearchInfo.setSearchType(2);
+			productSearchInfo.setWhere(orders_detail.getProduct_id()+"");
+			Product product= productDao.select(productSearchInfo).get(0);
+			int count = product.getSalecount();
+			count = count + orders_detail.getCount();
+			product.setSalecount(count);
+			productDao.update(product);
+			
+			
+			
+			Orders_status orders_status = list.get(i);
 			orders_status.setDate(date);
 			orders_status.setOrders_id(lastId);
 			orders_status.setInfo(code);
 			orderStatusDao.insert(orders_status);
-		}
-		
 			
+		}
+//		for (Orders_detail orders_detail : detailList) {
+//			orders_detail.setOrders_id(lastId);
+//			ordersDetailDao.insert(orders_detail);
+//		}
+//		for (Orders_status orders_status : list) {
+//			orders_status.setDate(date);
+//			orders_status.setOrders_id(lastId);
+//			orders_status.setInfo(code);
+//			orderStatusDao.insert(orders_status);
+//		}
+		
+		return "{\"state\":\"ok\"}";
 		
 		
 		

@@ -999,7 +999,7 @@
             info:info,
             comments :comment
           }
-          osData = JSON.strin7ify(os);
+          osData = JSON.stringify(os);
           o.status = 2;
         }else if(order.status==4){
           if(!confirm("确认退款"+o.nowamount +"元?"))return;
@@ -1027,7 +1027,7 @@
           }
         }).success(function(data){
           if(data.state=="false"){
-              window.location.href='login.html';
+               window.location.href='login.html';
             }
           if(data.state == "ok"){
             order.status = data.code;

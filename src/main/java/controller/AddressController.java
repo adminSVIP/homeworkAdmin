@@ -38,4 +38,32 @@ public class AddressController {
 		return "{\"rs\":\""+ rsRow +"\"}";
 	}
 	
+	@RequestMapping("del")
+	@ResponseBody
+	public String del(int id,HttpSession session) {
+		User  user = (User) session.getAttribute("user");
+		if(user==null)return "{\"state\":\"false\"}"; 
+		int rsRow = addressService.delete(id);
+		if(rsRow>0) {
+			return "{\"state\":\"ok\"}";
+		}
+		return "{\"state\":\"false\"}";
+	}
+	@RequestMapping("setUse")
+	@ResponseBody
+	public String setUse(int id,HttpSession session) {
+		User  user = (User) session.getAttribute("user");
+		if(user==null)return "{\"state\":\"false\"}"; 
+		List<Address> addresses = addressService.getUserAddress(user.getId());
+		for (Address address : addresses) {
+			if(address.getId()==id) {
+				address.setStatus(2);
+			}else {
+				address.setStatus(1);
+			}
+			addressService.update(address);
+		}
+		return "{\"state\":\"ok\"}";
+	}
+	
 }

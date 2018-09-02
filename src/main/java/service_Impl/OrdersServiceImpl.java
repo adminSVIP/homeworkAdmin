@@ -1,5 +1,6 @@
 package service_Impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,10 @@ public class OrdersServiceImpl implements OrdersService {
 
 	public int delete(int id) {
 		return ordersDao.delete(id);
+	}
+
+	public List<HashMap<String, Object>> userOrders(int user_id) {
+		return ordersDao.userOrders(user_id);
 	}
 
 }

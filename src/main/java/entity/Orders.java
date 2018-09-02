@@ -9,7 +9,7 @@ public class Orders {
 	private Double nowamount;
 	private int address_id;
 	private int user_id;
-	private int status;
+	private int status=1;
 	private String comments="";
 	private int assessstatus=0;
 	

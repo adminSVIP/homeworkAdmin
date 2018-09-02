@@ -34,11 +34,11 @@ public class OperatorController {
 		if(pageno == null) pageno = 1;
 		HttpSession session = req.getSession();
 		if(searchInfo == null) {
-			searchInfo = (SearchInfo) session.getAttribute("searchInfo");
+			searchInfo = (SearchInfo) session.getAttribute("operatorsearchInfo");
 			if(searchInfo == null) searchInfo = new SearchInfo();
 		}
 		searchInfo.setSearchOperator(true);
-		session.setAttribute("searchInfo", searchInfo);
+		session.setAttribute("operatorsearchInfo", searchInfo);
 //		System.out.println(searchInfo+":"+pageno);
 		searchInfo.setFlag(false);
 		searchInfo.setPageno(pageno.intValue());

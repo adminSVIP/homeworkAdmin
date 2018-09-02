@@ -39,7 +39,7 @@ public class ProductController {
 			if(productSearchInfo == null) productSearchInfo = new ProductSearchInfo();
 		}
 		
-		session.setAttribute("searchInfo", productSearchInfo);
+		session.setAttribute("productSearchInfo", productSearchInfo);
 //		System.out.println(searchInfo+":"+pageno);
 		productSearchInfo.setFlag(false);
 		productSearchInfo.setPageno(pageno.intValue());

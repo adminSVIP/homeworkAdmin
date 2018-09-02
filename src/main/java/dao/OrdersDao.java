@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
@@ -33,4 +34,15 @@ public interface OrdersDao {
 	
 	@Select("SELECT LAST_INSERT_ID()")
 	public int lastID ();
+	
+	@Select("select o.id,o.amount,o.nowamount,address_id,user_id,o.assessstatus," + 
+			"				o.status,count,product_id," + 
+			"				p.nowprice,p.fullname,p.activity,p.tip,p.sale,p.info" + 
+			"				from orders o " + 
+			"join oredrs_details od on(od.orders_id = o.id) " + 
+			"join product p on(p.id=od.product_id)" + 
+			"WHERE user_id = #{user_id}")
+	public List<HashMap<String,Object>> userOrders(int user_id);
+	
+	
 }

@@ -26,8 +26,14 @@ public class LoginFilter implements Filter {
 			if(url.matches("[a-zA-Z/]*user/regist"))return true;
 			if(url.matches("[a-zA-Z/]*user/currUser"))return true;
 			if(url.matches("[a-zA-Z/]*shopcar/myShopcars"))return true;
+			if(url.matches("[a-zA-Z/]*shopcar/insert"))return true;
+			if(url.matches("[a-zA-Z/]*shopcar/remove"))return true;
 			if(url.matches("[a-zA-Z/]*address/index"))return true;
 			if(url.matches("[a-zA-Z/]*address/add"))return true;
+			if(url.matches("[a-zA-Z/]*address/del"))return true;
+			if(url.matches("[a-zA-Z/]*address/setUse"))return true;
+			if(url.matches("[a-zA-Z/]*orders/userOrders"))return true;
+			if(url.matches("[a-zA-Z/]*orders/recivePackage"))return true;
 			if (url.endsWith(ignore)) return true;
 		}
 		return false;

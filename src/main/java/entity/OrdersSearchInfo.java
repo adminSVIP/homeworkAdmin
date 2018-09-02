@@ -36,8 +36,8 @@ public class OrdersSearchInfo {
 	public String getWhere() {
 		switch (searchType) {
 		case 1:
-//			if(where == null || where.trim().length() == 0) return "";
-//			return " where name  like '%"+ where +"%'  and status <> 3";
+			if(where == null || where.trim().length() == 0) return "";
+			return " where id =" + where;
 		case 2:
 //			if(where == null || where.trim().length() == 0) return "";
 //			return " where nike  like '%"+ where +"%' and status <> 3";

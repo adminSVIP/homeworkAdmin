@@ -25,7 +25,8 @@ public interface ProductDao {
 			+ "type_id=#{type_id},activity=#{activity},"
 			+ "tip = #{tip},sale = #{sale}, info = #{info},"
 			+ "price = #{price} ,nowprice = #{nowprice},"
-			+ "priority = #{priority} ,status = #{status},pics = #{pics}"
+			+ "priority = #{priority} ,status = #{status},pics = #{pics},"
+			+ "salecount=#{salecount},collectcount=#{collectcount}"
 			+ " where id = #{id} ")
 	public int update(Product product);
 	

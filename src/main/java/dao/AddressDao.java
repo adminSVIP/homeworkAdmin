@@ -27,10 +27,10 @@ public interface AddressDao {
 	
 	@Update("update address set user_id = #{user_id} , "
 			+ "zone = #{zone},addr=#{addr},name=#{name},"
-			+ "tel = #{tel}, status = #{status},"
+			+ "tel = #{tel}, status = #{status}"
 			+ " where id = #{id} ")
 	public int update(Address address);
 	
-	@Delete("delete user where id = #{id}")
+	@Delete("delete from address where id = #{id}")
 	public int delete(int id);
 }

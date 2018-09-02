@@ -1,5 +1,6 @@
 package service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import entity.Orders;
@@ -14,5 +15,5 @@ public interface OrdersService {
 
 	public int delete(int id);
 	
-	
+	public List<HashMap<String,Object>> userOrders(int user_id);
 }

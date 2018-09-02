@@ -18,8 +18,7 @@ public interface AssessDao {
 	
 	@Insert("insert into assess(orders_id,product_id,user_id,info,pics,result,status) "
 			+ "values(#{orders_id},#{product_id},#{user_id},#{info},"
-			+ "#{pics},#{result}),"
-			+ "#{status}")
+			+ "'',#{result},#{status})")
 	public int insert(Assess assess);
 	
 	@Update("update assess set orders_id = #{orders_id} , "
