@@ -42,6 +42,9 @@ public class ProductSearchInfo {
 		case 2:
 			if(where == null || where.trim().length() == 0) return "";
 			return " where id = "+ where;
+		case 3:
+			if(where == null || where.trim().length() == 0) return "";
+			return " where fullname like '%"+ where +"%' ";
 		default: 
 			return "";
 		}

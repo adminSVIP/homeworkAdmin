@@ -34,12 +34,12 @@ public class ProductController {
 	    response.setHeader("Access-Control-Allow-Credentials", "true");
 		if(pageno == null) pageno = 1;
 		HttpSession session = req.getSession();
-		if(productSearchInfo == null) {
-			productSearchInfo = (ProductSearchInfo) session.getAttribute("productSearchInfo");
-			if(productSearchInfo == null) productSearchInfo = new ProductSearchInfo();
-		}
-		
-		session.setAttribute("productSearchInfo", productSearchInfo);
+//		if(productSearchInfo == null) {
+//			productSearchInfo = (ProductSearchInfo) session.getAttribute("productSearchInfo");
+//			if(productSearchInfo == null) productSearchInfo = new ProductSearchInfo();
+//		}
+		System.out.println(productSearchInfo.getWhere());
+//		session.setAttribute("productSearchInfo", productSearchInfo);
 //		System.out.println(searchInfo+":"+pageno);
 		productSearchInfo.setFlag(false);
 		productSearchInfo.setPageno(pageno.intValue());
