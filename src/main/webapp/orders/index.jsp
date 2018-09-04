@@ -1,4 +1,12 @@
 <%@page pageEncoding="utf-8" %>
+<style>
+    .orderCode{
+        cursor: pointer;
+    }
+    .orderCode:hover{
+        color: orange;
+    }
+</style>
 <div class="col-md-12 col-sm-12 col-xs-12" style="min-height: 537px;">
     <div class="x_panel " style="min-height: 100%;">
         <div class="x_title">
@@ -10,13 +18,9 @@
                     </li>
                     <li style="margin-right: 20px; margin-left: 20px;">
 
-                        <select class="select_searchType" name="searchType">
-                            <option value="1">姓名</option>
-                            <option value="2">昵称</option>
-                            <option value="3" c-role='dateRange'>日期范围</option>
-                        </select>
-                        <input type="text" class="input_where" name="where">
-                        <select class="dateRange hidden">
+                       <label>日期范围查询</label>
+                       <input type="hidden" name="searchType" value="3">
+                        <select class="dateRange " name="where">
                             <option value="1">一周内</option>
                             <option value="2">本月内</option>
                             <option value="3">30天内</option>
@@ -68,7 +72,9 @@
                         <tr ng-repeat="order in orders track by $index ">
 
                             <td class=" ">{{order.date}}</td>
-                            <td class=" ">{{order.code}}</td>
+                            <td class="orderCode" ng-click='showOrderDetails(order)'>
+                                {{order.code}}
+                            </td>
                             <td class=" ">{{order.amount}}</td>
                             <td class=" ">{{order.nowamount}}</td>
                             <td class=" ">{{order.address_id}}</td>

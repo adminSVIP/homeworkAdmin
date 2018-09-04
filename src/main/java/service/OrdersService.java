@@ -16,4 +16,7 @@ public interface OrdersService {
 	public int delete(int id);
 	
 	public List<HashMap<String,Object>> userOrders(int user_id);
+	
+	
+	public List<HashMap<String,Object>> userOrdersDetails(int id);
 }

@@ -36,7 +36,14 @@ public class ShopcarSearchInfo {
 	}
 	
 	public String getWhere() {
-		return where;
+		switch (searchType) {
+		case 1:
+			return " s JOIN  product p on(s.product_id = p.id) where fullname like '%"+ where +"%'";
+		case 2:
+			return " s JOIN  product p on(s.product_id = p.id)  where user_id = "+where;
+		default: 
+			return where;
+		}
 	}
 	public void setWhere(String where) {
 		this.where = where;

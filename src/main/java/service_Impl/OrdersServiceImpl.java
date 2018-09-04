@@ -37,4 +37,8 @@ public class OrdersServiceImpl implements OrdersService {
 		return ordersDao.userOrders(user_id);
 	}
 
+	public List<HashMap<String, Object>> userOrdersDetails(int id) {
+		return ordersDao.userOrdersDetails(id);
+	}
+
 }

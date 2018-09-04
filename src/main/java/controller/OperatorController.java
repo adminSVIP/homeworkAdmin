@@ -20,6 +20,7 @@ import org.springframework.web.servlet.View;
 import entity.Operator;
 import entity.SearchInfo;
 import service.OperatorService;
+import util.md5;
 
 @Controller
 @RequestMapping("operator")
@@ -73,4 +74,18 @@ public class OperatorController {
 		return "{\"rs\":\""+ rsRow +"\"}";
 	}
 	
+	@RequestMapping("altPas")
+	@ResponseBody
+	public String alterPass(String pass,String newPass,HttpSession session) {
+		System.out.println("pass"+pass);
+		Operator operator = (Operator) session.getAttribute("user");
+		if(md5.toMd5(pass).equals(operator.getPassword())) {
+			operator.setPassword(newPass);
+			session.setAttribute("user", operator);
+			operatorService.update(operator);
+			return "{\"rs\":\"ok\"}";
+		}else {
+			return "{\"rs\":\"false\"}";
+		}
+	}
 }

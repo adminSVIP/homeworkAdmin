@@ -10,7 +10,7 @@ import entity.ShopcarSearchInfo;
 
 public interface ShopcarService {
 
-	public List select(SearchInfo searchInfo);
+	public List select(ShopcarSearchInfo searchInfo);
 
 	public int insert(Shopcar shopcar);
 

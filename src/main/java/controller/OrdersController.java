@@ -89,6 +89,11 @@ public class OrdersController {
 		return ordersService.userOrders(user.getId());
 		
 	}
+	@RequestMapping("orderDetails")
+	@ResponseBody
+	public List<HashMap<String,Object>> orderDetails(int id ){
+		return ordersService.userOrdersDetails(id);
+	}
 	
 	
 	@RequestMapping("update")

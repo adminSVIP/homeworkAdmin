@@ -18,7 +18,7 @@ public class ShopcarServiceImpl implements ShopcarService {
 	@Autowired
 	ShopcarDao shopcarDao;
 
-	public List select(SearchInfo searchInfo) {
+	public List select(ShopcarSearchInfo searchInfo) {
 		return shopcarDao.select(searchInfo);
 	}
 

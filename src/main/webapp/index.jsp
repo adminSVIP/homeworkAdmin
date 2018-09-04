@@ -1,14 +1,13 @@
 <%@page import="entity.Operator" isELIgnored="false"%>
   <%@page pageEncoding="utf-8" %>
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
     <% 
 	Operator user = (Operator)session.getAttribute("user");
 	int power = user.getPower();
-
+  int id = user.getId();
 %>
-
-<head>
+<head> 
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <!-- Meta, title, CSS, favicons, etc. -->
   <meta charset="utf-8">
@@ -54,6 +53,11 @@
       height: 100% !important;
     }
 
+    .layui-layer-content .row {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
     /* #editor .edui-editor-iframeholder{
             height: 400px !important;
           } */
@@ -82,9 +86,9 @@
 
           <!-- menu profile quick info -->
           <div class="profile clearfix">
-            <div class="profile_pic">
+            <!-- <div class="profile_pic">
               <img src="static/images/img.jpg" alt="..." class="img-circle profile_img">
-            </div>
+            </div> -->
             <div class="profile_info">
               <span>欢迎,</span>
               <h2>${sessionScope.user.nike}</h2>
@@ -99,78 +103,26 @@
             <div class="menu_section">
               <ul class="nav side-menu">
                 <% if(power>=2){ %>
-                <li>
-                  <a class="a_admin" href="#operator_index">
-                    <i class="fa fa-laptop"></i>管理员管理</a>
-                </li>
-                <%} %>
-                <li>
-                  <a class="a_admin" href="#product_index">
-                    <i class="fa fa-laptop"></i>商品管理</a>
-                </li>
-                <li>
-                  <a class="a_admin" href="#shopcar_index">
-                    <i class="fa fa-laptop"></i>购物车</a>
-                </li>
-                <li>
-                  <a class="a_admin" href="#orders_index">
-                    <i class="fa fa-laptop"></i>订单管理</a>
-                </li>
+                  <li>
+                    <a class="a_admin" href="#operator_index">
+                      <i class="fa fa-laptop"></i>管理员管理</a>
+                  </li>
+                  <%} %>
+                    <li>
+                      <a class="a_admin" href="#product_index">
+                        <i class="fa fa-laptop"></i>商品管理</a>
+                    </li>
+                    <li>
+                      <a class="a_admin" href="#shopcar_index">
+                        <i class="fa fa-laptop"></i>购物车</a>
+                    </li>
+                    <li>
+                      <a class="a_admin" href="#orders_index">
+                        <i class="fa fa-laptop"></i>订单管理</a>
+                    </li>
+
               </ul>
-              <!-- <h3>General</h3>
-                <ul class="nav side-menu">
-                  <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="index.html">Dashboard</a></li>
-                      <li><a href="index2.html">Dashboard2</a></li>
-                      <li><a href="index3.html">Dashboard3</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="form.html">General Form</a></li>
-                      <li><a href="form_advanced.html">Advanced Components</a></li>
-                      <li><a href="form_validation.html">Form Validation</a></li>
-                      <li><a href="form_wizards.html">Form Wizard</a></li>
-                      <li><a href="form_upload.html">Form Upload</a></li>
-                      <li><a href="form_buttons.html">Form Buttons</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-desktop"></i> UI Elements <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="general_elements.html">General Elements</a></li>
-                      <li><a href="media_gallery.html">Media Gallery</a></li>
-                      <li><a href="typography.html">Typography</a></li>
-                      <li><a href="icons.html">Icons</a></li>
-                      <li><a href="glyphicons.html">Glyphicons</a></li>
-                      <li><a href="widgets.html">Widgets</a></li>
-                      <li><a href="invoice.html">Invoice</a></li>
-                      <li><a href="inbox.html">Inbox</a></li>
-                      <li><a href="calendar.html">Calendar</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="tables.html">Tables</a></li>
-                      <li><a href="tables_dynamic.html">Table Dynamic</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="chartjs.html">Chart JS</a></li>
-                      <li><a href="chartjs2.html">Chart JS2</a></li>
-                      <li><a href="morisjs.html">Moris JS</a></li>
-                      <li><a href="echarts.html">ECharts</a></li>
-                      <li><a href="other_charts.html">Other Charts</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-clone"></i>Layouts <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="fixed_sidebar.html">Fixed Sidebar</a></li>
-                      <li><a href="fixed_footer.html">Fixed Footer</a></li>
-                    </ul>
-                  </li>
-                </ul> -->
+           
             </div>
 
 
@@ -209,22 +161,19 @@
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="static/images/img.jpg" alt="">${sessionScope.user.nike}
+                  <!-- <img src="static/images/img.jpg" alt=""> -->
+                  ${sessionScope.user.nike}
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
+                  <!-- <li>
+                    <a href="#profile">个人主页</a>
+                  </li> -->
+
                   <li>
-                    <a href="javascript:;"> Profile</a>
+                    <a class="alterPass">修改密码</a>
                   </li>
-                  <li>
-                    <a href="javascript:;">
-                      <span class="badge bg-red pull-right">50%</span>
-                      <span>Settings</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="javascript:;">Help</a>
-                  </li>
+
                   <li>
                     <a href="Logout">
                       <i class="fa fa-sign-out pull-right"></i>退出登陆</a>
@@ -232,37 +181,10 @@
                 </ul>
               </li>
 
-              <li role="presentation" class="dropdown">
-                <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                  <i class="fa fa-envelope-o"></i>
-                  <span class="badge bg-green">6</span>
-                </a>
-                <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                  <li>
-                    <a>
-                      <span class="image">
-                        <img src="static/images/img.jpg" alt="Profile Image" />
-                      </span>
-                      <span>
-                        <span>${sessionScope.user.nike}</span>
-                        <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                      </span>
-                    </a>
-                  </li>
-                  
-                  <li>
-                    <div class="text-center">
-                      <a>
-                        <strong>See All Alerts</strong>
-                        <i class="fa fa-angle-right"></i>
-                      </a>
-                    </div>
-                  </li>
-                </ul>
-              </li>
+
+
+            </ul>
+            </li>
             </ul>
           </nav>
         </div>
@@ -324,7 +246,7 @@
   <!-- bootstrap-daterangepicker -->
   <script src="vendors/moment/min/moment.min.js"></script>
   <script src="vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
-  
+
   <script src="vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
 
   <script src="vendors/fastclick/lib/fastclick.js"></script>
@@ -339,7 +261,7 @@
   <script src="static/layui/layui.js"></script>
 
   <script>
-    
+
     $.fn.serializeObject = function () {
       var o = {};
       var a = this.serializeArray();
@@ -355,7 +277,7 @@
       });
       return o;
     };
-    var instances= [];
+    var instances = [];
     var jdShop = angular.module("jdShop", ["ngRoute"]);
     jdShop.config(['$routeProvider', function ($routeProvider) {
       $routeProvider
@@ -385,9 +307,13 @@
         .when('/orders_index', {
           templateUrl: "orders/index.jsp",
           controller: 'ordersIndexController'
-        });
+        })
+        .when('/profile', {
+          templateUrl: "operator/profile.jsp",
+          controller: 'profileController'
+        })
     }]);
-    jdShop.config(['$httpProvider', function($httpProvider) {
+    jdShop.config(['$httpProvider', function ($httpProvider) {
       $httpProvider.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
     }])
 
@@ -415,30 +341,35 @@
         });
       }
       $scope.getStatus = function () {
-       
+
         $http({
           method: "post",
           data: "",
           url: "operator/status"
         }).success(function (data) {
-          if(data.state=="false"){
-            window.location.href='login.html';
+          if (data.state == "false") {
+            window.location.href = 'login.html';
           }
           $scope.status = data;
         });
       }
       $scope.show = function (width, height, title, url) {
+        var offset = "t";
+        if ($scope.queryType == "alertStatus") {
+          offset = "auto";
+        }
         layui.use('layer', function () {
           var layer = layui.layer;
           layer.open({
-            type: 1 //PageÃ¥Â±ÂÃ§Â±Â»Ã¥ÂÂ
+            type: 1
             , area: [width + 'px', height + 'px']
             , title: title
-            , shade: 0 //Ã©ÂÂ®Ã§Â½Â©Ã©ÂÂÃ¦ÂÂÃ¥ÂºÂ¦
-            , offset: 't'
-            , maxmin: true //Ã¥ÂÂÃ¨Â®Â¸Ã¥ÂÂ¨Ã¥Â±ÂÃ¦ÂÂÃ¥Â°ÂÃ¥ÂÂ
-            , anim: -1 //0-6Ã§ÂÂÃ¥ÂÂ¨Ã§ÂÂ»Ã¥Â½Â¢Ã¥Â¼ÂÃ¯Â¼Â-1Ã¤Â¸ÂÃ¥Â¼ÂÃ¥ÂÂ¯
+            , shade: 0.3
+            , offset: offset
+            , maxmin: true
+            , anim: -1
             , content: ""
+            , scrollbar: false
             , cancel: function (layero, index) {
               $(layero[0]).remove();
             }
@@ -449,8 +380,8 @@
                 url: url,
               }).
                 success(function (data) {
-                  if(data.state=="false"){
-                    window.location.href='login.html';
+                  if (data.state == "false") {
+                    window.location.href = 'login.html';
                   }
                   var linkFn = $compile(data);
                   var element = linkFn($scope);
@@ -485,21 +416,64 @@
       $scope.addOperator = function () {
         $scope.currOperator = null;
         $scope.queryType = "insert";
-        $scope.show(500, 580, "æ·»å ç®¡çå", 'operator/addForm.html');
+        $scope.show(700, 550, "添加管理员", 'operator/addForm.html');
       }
       $scope.alterOperator = function (o) {
         $scope.currOperator = o;
         $scope.queryType = "update";
-        $scope.show(500, 580, "ç¼è¾ç®¡çå", 'operator/addForm.html');
+        $scope.show(700, 550, "编辑管理员信息", 'operator/addForm.html');
+      }
+      $scope.alterStatus = function (o) {
+        $scope.currOperator = o;
+        $scope.queryType = "alertStatus";
+        $scope.show(300, 300, "编辑管理员信息", 'operator/alterStatusForm.html');
+      }
+      $scope.resetPass = function (o) {
+        $scope.currOperator = o;
+        $scope.currOperator.password = "123";
+        var formData = JSON.stringify($scope.currOperator);
+        $.ajax({
+          type: "post",
+          url: "operator/update",
+          contentType: "application/json",
+          dataType: "json",
+          data: formData,
+          success: function (data) {
+            if (data.state == "false") {
+              window.location.href = 'login.html';
+            }
+            if (data.rs > 0) {
+              alert("重置成功");
+              $scope.getOperators();
+            } else {
+              alert("重置失败");
+            }
+          },
+          error: function (data) {
+            if (data.state == "false") {
+              window.location.href = 'login.html';
+            }
+            console.log(data);
+          }
+
+        })
+
+
       }
       $scope.confrim = function () {
         var sex = $("input[name='sex']").val();
         if (sex == "") {
-          alert("æå¥å¤±è´¥");
+          alert("选择性别");
           return;
         }
         // var formData = $(".operatorForm").serializeObject();
         var formData = JSON.stringify($(".operatorForm").serializeObject());
+        if ($scope.queryType == "alertStatus") {
+          $scope.queryType = "update";
+          var status = $(".input_status").val();
+          $scope.currOperator.status = status;
+          formData = JSON.stringify($scope.currOperator);
+        }
 
         $.ajax({
           type: "post",
@@ -508,19 +482,19 @@
           dataType: "json",
           data: formData,
           success: function (data) {
-            if(data.state=="false"){
-              window.location.href='login.html';
+            if (data.state == "false") {
+              window.location.href = 'login.html';
             }
             if (data.rs > 0) {
               $(".layui-layer-page").remove();
               $scope.getOperators();
             } else {
-              alert("æå¥å¤±è´¥");
+              alert("失败");
             }
           },
           error: function (data) {
-            if(data.state=="false"){
-              window.location.href='login.html';
+            if (data.state == "false") {
+              window.location.href = 'login.html';
             }
             console.log(data);
           }
@@ -538,18 +512,17 @@
           data: formData,
           url: "operator/select"
         }).success(function (data) {
-          if(data.state=="false"){
-            window.location.href='login.html';
+          if (data.state == "false") {
+            window.location.href = 'login.html';
           }
           $scope.operators = data.list;
           $scope.allPage = data.allRows % 6 == 0 ? data.allRows / 6 : parseInt(data.allRows / 6) + 1;
-          $(".input_where").val("");
         });
       }
       $scope.next = function () {
         if ((parseInt($scope.currPage) + 1) <= $scope.allPage) {
           var active = $(".pagination .active");
-          $scope.currPage = $scope.currPage + 1;
+          $scope.currPage = parseInt($scope.currPage) + 1;
           $scope.getOperators($scope.currPage);
           var nextBtn = $(".pagination .next");
           var cmaxPage = nextBtn.prev().find("a").html();
@@ -611,6 +584,7 @@
           })
         }
       }
+
       $scope.getOperators();
       $scope.getStatus();
 
@@ -622,15 +596,15 @@
       $scope.allPage;
       $scope.currProducts = null;
       $scope.pStatuses;
-
+      $scope.pics = [];
       $scope.pqueryType;
       $scope.getPStatus = function () {
         $http({
           method: "post",
           url: "product/status"
         }).success(function (data) {
-          if(data.state=="false"){
-            window.location.href='login.html';
+          if (data.state == "false") {
+            window.location.href = 'login.html';
           }
           $scope.pStatuses = data;
         })
@@ -645,10 +619,15 @@
           method: "post",
           url: "product/select" + pageno
         }).success(function (data) {
-          if(data.state=="false"){
-            window.location.href='login.html';
+          if (data.state == "false") {
+            window.location.href = 'login.html';
           }
           $scope.products = data.list;
+          $scope.products.forEach(element => {
+            var key = "pic";
+            var value = element.pics.split(",")[0];
+            element[key] = value;
+          });
           $scope.allPage = data.allRows % 6 == 0 ? data.allRows / 6 : parseInt(data.allRows / 6) + 1;
         });
       }
@@ -656,13 +635,13 @@
         layui.use('layer', function () {
           var layer = layui.layer;
           layer.open({
-            type: 1 //PageÃ¥Â±ÂÃ§Â±Â»Ã¥ÂÂ
+            type: 1
             , area: [width + 'px', height + 'px']
             , title: title
-            , shade: 0 //Ã©ÂÂ®Ã§Â½Â©Ã©ÂÂÃ¦ÂÂÃ¥ÂºÂ¦
+            , shade: 0
             , offset: 't'
-            , maxmin: true //Ã¥ÂÂÃ¨Â®Â¸Ã¥ÂÂ¨Ã¥Â±ÂÃ¦ÂÂÃ¥Â°ÂÃ¥ÂÂ
-            , anim: -1 //0-6Ã§ÂÂÃ¥ÂÂ¨Ã§ÂÂ»Ã¥Â½Â¢Ã¥Â¼ÂÃ¯Â¼Â-1Ã¤Â¸ÂÃ¥Â¼ÂÃ¥ÂÂ¯
+            , maxmin: true
+            , anim: -1
             , content: ""
             , cancel: function (layero, index) {
               $(layero[0]).remove();
@@ -674,30 +653,45 @@
                 url: url,
               }).
                 success(function (data) {
-                  if(data.state=="false"){
-                    window.location.href='login.html';
+                  if (data.state == "false") {
+                    window.location.href = 'login.html';
                   }
                   var linkFn = $compile(data);
                   var element = linkFn($scope);
                   $scope.element = element;
                   var layerContent = $(layero[0]).find(".layui-layer-content");
                   layerContent.html($scope.element);
+                  if ($scope.pqueryType == "update") {
+                    console.log($scope.pics);
+                    // data-dz-thumbnail
+                    var html = "<div class='col-md-12 pull-right'>";
+                    if($scope.pics.length==0){
+                      html = html +"<h1>没有上传图片</h1>";
+                    }else{
+                      html = html +"<h3>上传的图片</h3>";
+                      for(var i = 0 ;i<$scope.pics.length;i++){
+                        html = html +"<img class='col-md-6 well' style='height:130px;'  src='"+ $scope.pics[i] +"'  >";
+                      }
+                    }
+                              
+                    html = html+"</div>";
+                    $(".layui-layer .x_content .dr").append(html);
+                  }
                   // dropZone
-                  $(".layui-layer .x_content .dr").append("<form action='uploadPic' class='dropzone col-md-4  pull-right'  id='myForm'></form>");
+                  $(".layui-layer .x_content .dr").append("<form action='uploadPic' class='dropzone col-md-12  pull-right'  id='myForm'></form>");
 
                   $("#myForm").dropzone({
                     url: "uploadPic",
-                    maxFiles: 4,//Ã¦ÂÂÃ¥Â¤ÂÃ¤Â¸ÂÃ¤Â¼Â Ã¦ÂÂÃ¤Â»Â¶Ã¦ÂÂ°
-                    paramName: "noteImg",//Ã¥ÂÂÃ¦ÂÂ°
+                    maxFiles: 4,
+                    paramName: "noteImg",
                     dictMaxFilesExceeded: "dictMaxFilesExceeded",
-                    dictDefaultMessage: 'dictDefaultMessage',
+                    dictDefaultMessage: '点击重新上传图片,将以本次上传的为准',
                     dictCancelUpload: "dictCancelUpload",
                     addRemoveLinks: true,
                     dictCancelUploadConfirmation: "dictCancelUploadConfirmation",
-                    dictRemoveFile: "ç§»é¤æä»¶",
+                    dictRemoveFile: "移除文件",
                     init: function () {
                       this.on("success", function (file, data) {
-                        //Ã¤Â¸ÂÃ¤Â¼Â Ã¦ÂÂÃ¥ÂÂÃ¨Â§Â¦Ã¥ÂÂÃ§ÂÂÃ¤ÂºÂÃ¤Â»Â¶
                         $scope.pics.push(data.src);
                         // $scope.pics.splice($.inArray(2, $scope.pics), 1);
                         $(".dz-remove").attr("pic", data.src);
@@ -713,7 +707,7 @@
 
 
 
-          
+
                 })
             }
 
@@ -728,22 +722,112 @@
       }
       $scope.alterProducts = function (o) {
         $scope.currProducts = o;
+        $scope.pics = $scope.currProducts.pics.split(",");
         $scope.pqueryType = "update";
         $scope.show(1080, 600, "编辑商品", 'product/index.jsp');
-        
       }
+      $scope.search = function () {
+        var formData = JSON.stringify($(".searchForm").serializeObject());
+        $scope.currPage = 1;
+        $(".pagination .active").removeClass("active");
+        $(".pagination .previous").next().addClass("active");
+        console.log(formData);
+        $http({
+          method: "post",
+          data: formData,
+          url: "product/select"
+        }).success(function (data) {
+          if (data.state == "false") {
+            window.location.href = 'login.html';
+          }
+          $scope.products = data.list;
+          $scope.products.forEach(element => {
+            var key = "pic";
+            var value = element.pics.split(",")[0];
+            element[key] = value;
+          });
+          $scope.allPage = data.allRows % 6 == 0 ? data.allRows / 6 : parseInt(data.allRows / 6) + 1;
+        });
+      }
+      $scope.next = function () {
+        if ((parseInt($scope.currPage) + 1) <= $scope.allPage) {
+          var active = $(".pagination .active");
+          $scope.currPage = parseInt($scope.currPage) + 1;
+          $scope.getProducts($scope.currPage);
+          var nextBtn = $(".pagination .next");
+          var cmaxPage = nextBtn.prev().find("a").html();
+          if (cmaxPage < $scope.allPage) {
+            $(".pagination li a").each(function () {
+              var content = $(this).html();
+              if (content == "上一页" || content == "下一页") return true;
+              $(this).html(parseInt($(this).html()) + 1);
+            })
+          }
+          if (active.next().find("a").html() == "下一页") return;
+          active.removeClass("active");
+          active.next().addClass("active");
+
+        }
+      }
+      $scope.prev = function () {
+        if (($scope.currPage - 1) >= 1) {
+          var active = $(".pagination .active");
+          $scope.currPage = $scope.currPage - 1;
+          $scope.getProducts($scope.currPage);
+          var prevBtn = $(".pagination .previous");
+          var cminPage = prevBtn.next().find("a").html();
+          if (cminPage > 1) {
+            $(".pagination li a").each(function () {
+              var content = $(this).html();
+              if (content == "上一页" || content == "下一页") return true;
+              $(this).html(parseInt($(this).html()) - 1);
+            })
+          }
+          if (active.prev().find("a").html() == "上一页") return;
+          active.removeClass("active");
+          active.prev().addClass("active");
+        }
+      }
+      $scope.pageBtn = function (event) {
+        $(event.target).parent().siblings(".active").removeClass("active");
+        $(event.target).parent().addClass("active");
+        $scope.currPage = $(event.target).html();
+        $scope.getProducts($scope.currPage);
+        var prevBtn = $(".pagination .previous");
+        var cminPage = prevBtn.next().find("a").html();
+        if (cminPage > 2) {
+          console.log("-2");
+          $(".pagination li a").each(function () {
+            var content = $(this).html();
+            if (content == "下一页" || content == "上一页") return true;
+            $(this).html(parseInt($(this).html()) - 2);
+          })
+        }
+        var nextBtn = $(".pagination .next");
+        var cmaxPage = nextBtn.prev().find("a").html();
+        if (cmaxPage < ($scope.allPage - 1)) {
+          console.log("+2");
+          $(".pagination li a").each(function () {
+            var content = $(this).html();
+            if (content == "下一页" || content == "上一页") return true;
+            $(this).html(parseInt($(this).html()) + 2);
+          })
+        }
+      }
+
+
 
       $scope.types;
       $scope.subTypes;
       $scope.allTypes;
-      $scope.pics = [];
+
       $scope.getTypes = function (parentid) {
         $http({
           method: "post",
           url: "type/select?id=" + parentid,
         }).success(function (data) {
-          if(data.state=="false"){
-            window.location.href='login.html';
+          if (data.state == "false") {
+            window.location.href = 'login.html';
           }
           $scope.types = data;
         });
@@ -758,13 +842,13 @@
         return false;
       }
       $scope.allTypes = function () {
-        
+
         $http({
           method: "post",
           url: "type/select",
         }).success(function (data) {
-          if(data.state=="false"){
-            window.location.href='login.html';
+          if (data.state == "false") {
+            window.location.href = 'login.html';
           }
           $scope.allTypes = data;
         });
@@ -781,8 +865,8 @@
           url: "product/" + $scope.pqueryType,
           data: data
         }).success(function (data) {
-          if(data.state=="false"){
-            window.location.href='login.html';
+          if (data.state == "false") {
+            window.location.href = 'login.html';
           }
           console.log(data);
           if (data.rs > 0) {
@@ -794,10 +878,10 @@
           }
         });
       })
-     
+
       $scope.showTypeWin = function (width, height, title, pid) {
         var content = "<div class=' row'>"
-          + "   <label style='margin-top:10px;' class='control-label col-md-3 col-sm-3 col-xs-12' for='first-pType'>Ã§Â±Â»Ã¥ÂÂÃ¥ÂÂÃ§Â§Â°"
+          + "   <label style='margin-top:10px;' class='control-label col-md-3 col-sm-3 col-xs-12' for='first-pType'>类型名称"
           + "   </label>"
           + "   <div class=' col-md-3 col-sm-3  ' style='margin-top: 5px;border-radius: 3px' >"
           + "       <input type='text' name='name'  class='input_pName'   value=''  id='first-pType' required='required'"
@@ -806,19 +890,19 @@
           + "   </div>"
           + "</div>"
           + "<div class='row'><div class='col-md-6 col-sm-6 col-xs-12 col-md-offset-3'>"
-          + "<button class='btn btn-success btnSub' >Ã¦ÂÂÃ¤ÂºÂ¤</button>"
+          + "<button class='btn btn-success btnSub' >提交</button>"
           + "</div></div>"
 
         layui.use('layer', function () {
           var layer = layui.layer;
           layer.open({
-            type: 1 //PageÃ¥Â±ÂÃ§Â±Â»Ã¥ÂÂ
+            type: 1
             , area: [width + 'px', height + 'px']
             , title: title
-            , shade: 0 //Ã©ÂÂ®Ã§Â½Â©Ã©ÂÂÃ¦ÂÂÃ¥ÂºÂ¦
+            , shade: 0
             // ,offset: 't'
-            , maxmin: true //Ã¥ÂÂÃ¨Â®Â¸Ã¥ÂÂ¨Ã¥Â±ÂÃ¦ÂÂÃ¥Â°ÂÃ¥ÂÂ
-            , anim: -1 //0-6Ã§ÂÂÃ¥ÂÂ¨Ã§ÂÂ»Ã¥Â½Â¢Ã¥Â¼ÂÃ¯Â¼Â-1Ã¤Â¸ÂÃ¥Â¼ÂÃ¥ÂÂ¯
+            , maxmin: true
+            , anim: -1
             , content: content
             , cancel: function (layero, index) {
               $(layero[0]).remove();
@@ -847,8 +931,8 @@
             method: "post",
             url: "type/select?id=" + id,
           }).success(function (data) {
-            if(data.state=="false"){
-              window.location.href='login.html';
+            if (data.state == "false") {
+              window.location.href = 'login.html';
             }
             if (data.length == 0) return;
             var html = "<ul class='dropdown-menu sub_m show pull-left' style='position: absolute;top:0;left: 100%;' >";
@@ -878,20 +962,21 @@
           "name": name,
           "parentid": parentid
         }
+        console.log(JSON.stringify(data));
         $http({
           method: "post",
           url: "type/insert",
           data: JSON.stringify(data)
         }).success(function (data) {
-          if(data.state=="false"){
-              window.location.href='login.html';
-            }
+          if (data.state == "false") {
+            window.location.href = 'login.html';
+          }
           if (data.rs > 0) {
             ths.parents(".layui-layer-page").remove();
             // $scope.getOperators();
             $scope.getTypes(0);
           } else {
-            alert("Ã¦ÂÂÃ¥ÂÂ¥Ã¥Â¤Â±Ã¨Â´Â¥");
+            alert("添加失败");
           }
         });
 
@@ -899,13 +984,13 @@
       $(document).on("click", ".layui-layer .col-md-2 .dropdown-menu a", function (e) {
         e.preventDefault();
         $(".input_pType").val($(this).text());
-        $(".hid_typeId").val($(this).parent().attr("id")); 
+        $(".hid_typeId").val($(this).parent().attr("id"));
 
       })
       $(document).on("click", ".layui-layer .col-md-2 .glyphicon-plus", function (e) {
         e.preventDefault();
         var id = $(this).prev().attr("id");
-        $scope.showTypeWin(350, 250, "Ã¦Â·Â»Ã¥ÂÂ Ã§Â±Â»Ã¥ÂÂ", id);
+        $scope.showTypeWin(350, 250, "添加类型", id);
       })
       $scope.getProducts();
       $scope.getPStatus();
@@ -914,49 +999,27 @@
     }])
     jdShop.controller("shopcarIndexController", ["$scope", "$http", "$compile", function ($scope, $http, $compile) {
       $scope.shopcars;
-      $scope.getShopcars = function(){
+      $scope.currPage = 1;
+      $scope.allPage;
+      $scope.getShopcars = function (pageno) {
+        if (pageno != undefined) {
+          pageno = "?pageno=" + pageno;
+        } else {
+          pageno = "";
+        }
         $http({
-          url:"shopcar/index",
-          method:"POST",
-        }).success(function(data){
-          if(data.state=="false"){
-              window.location.href='login.html';
-            }
-          $scope.shopcars = data.list;
-          console.log(data);
-        })
-      }
-      $scope.getShopcars();
-
-    }])
-  
-    jdShop.controller("ordersIndexController", ["$scope", "$http", "$compile", function ($scope, $http, $compile) {
-      $scope.orders;
-      $scope.oStatuses
-      $scope.getOStatus = function () {
-        $http({
-          method: "post",
-          url: "orders/status"
+          url: "shopcar/index" + pageno,
+          method: "POST",
         }).success(function (data) {
-          if(data.state=="false"){
-              window.location.href='login.html';
-            }
-          console.log(data);
-          $scope.oStatuses = data;
+          if (data.state == "false") {
+            window.location.href = 'login.html';
+          }
+          $scope.shopcars = data.list;
+          $scope.allPage = data.allRows % 6 == 0 ? data.allRows / 6 : parseInt(data.allRows / 6) + 1;
         })
       }
-      $scope.getOrders = function(){
-        $http({
-          url:"orders/select",
-          method:"POST",
-        }).success(function(data){
-          if(data.state=="false"){
-              window.location.href='login.html';
-            }
-          $scope.orders = data.list;
-        })
-      }
-      $scope.search = function(){
+      // $scope.getShopcars();
+      $scope.search = function () {
         var formData = JSON.stringify($(".searchForm").serializeObject());
         $scope.currPage = 1;
         $(".pagination .active").removeClass("active");
@@ -965,52 +1028,184 @@
         $http({
           method: "post",
           data: formData,
+          url: "shopcar/index"
+        }).success(function (data) {
+          if (data.state == "false") {
+            window.location.href = 'login.html';
+          }
+          console.log(data.list);
+          $scope.shopcars = data.list;
+          $scope.shopcars.forEach(element => {
+            var key = "pic";
+            var value = element.pics.split(",")[0];
+            element[key] = value;
+          });
+          $scope.allPage = data.allRows % 6 == 0 ? data.allRows / 6 : parseInt(data.allRows / 6) + 1;
+        });
+      }
+
+      $scope.next = function () {
+        if ((parseInt($scope.currPage) + 1) <= $scope.allPage) {
+          var active = $(".pagination .active");
+          $scope.currPage = parseInt($scope.currPage) + 1;
+          $scope.getShopcars($scope.currPage);
+          var nextBtn = $(".pagination .next");
+          var cmaxPage = nextBtn.prev().find("a").html();
+          if (cmaxPage < $scope.allPage) {
+            $(".pagination li a").each(function () {
+              var content = $(this).html();
+              if (content == "上一页" || content == "下一页") return true;
+              $(this).html(parseInt($(this).html()) + 1);
+            })
+          }
+          if (active.next().find("a").html() == "下一页") return;
+          active.removeClass("active");
+          active.next().addClass("active");
+
+        }
+      }
+      $scope.prev = function () {
+        if (($scope.currPage - 1) >= 1) {
+          var active = $(".pagination .active");
+          $scope.currPage = $scope.currPage - 1;
+          $scope.getShopcars($scope.currPage);
+          var prevBtn = $(".pagination .previous");
+          var cminPage = prevBtn.next().find("a").html();
+          if (cminPage > 1) {
+            $(".pagination li a").each(function () {
+              var content = $(this).html();
+              if (content == "上一页" || content == "下一页") return true;
+              $(this).html(parseInt($(this).html()) - 1);
+            })
+          }
+          if (active.prev().find("a").html() == "上一页") return;
+          active.removeClass("active");
+          active.prev().addClass("active");
+        }
+      }
+      $scope.pageBtn = function (event) {
+        $(event.target).parent().siblings(".active").removeClass("active");
+        $(event.target).parent().addClass("active");
+        $scope.currPage = $(event.target).html();
+        $scope.getShopcars($scope.currPage);
+        var prevBtn = $(".pagination .previous");
+        var cminPage = prevBtn.next().find("a").html();
+        if (cminPage > 2) {
+          console.log("-2");
+          $(".pagination li a").each(function () {
+            var content = $(this).html();
+            if (content == "下一页" || content == "上一页") return true;
+            $(this).html(parseInt($(this).html()) - 2);
+          })
+        }
+        var nextBtn = $(".pagination .next");
+        var cmaxPage = nextBtn.prev().find("a").html();
+        if (cmaxPage < ($scope.allPage - 1)) {
+          console.log("+2");
+          $(".pagination li a").each(function () {
+            var content = $(this).html();
+            if (content == "下一页" || content == "上一页") return true;
+            $(this).html(parseInt($(this).html()) + 2);
+          })
+        }
+      }
+
+
+
+    }])
+
+    jdShop.controller("ordersIndexController", ["$scope", "$http", "$compile", function ($scope, $http, $compile) {
+      $scope.orders;
+      $scope.currOrder;
+      $scope.oStatuses
+      $scope.currPage = 1;
+      $scope.allPage;
+      $scope.orderDetails;
+      $scope.getOStatus = function () {
+        $http({
+          method: "post",
+          url: "orders/status"
+        }).success(function (data) {
+          if (data.state == "false") {
+            window.location.href = 'login.html';
+          }
+          console.log(data);
+          $scope.oStatuses = data;
+        })
+      }
+      $scope.getOrders = function (pageno) {
+        if (pageno != undefined) {
+          pageno = "?pageno=" + pageno;
+        } else {
+          pageno = "";
+        }
+        $http({
+          url: "orders/select"+pageno,
+          method: "POST",
+        }).success(function (data) {
+          if (data.state == "false") {
+            window.location.href = 'login.html';
+          }
+          $scope.orders = data.list;
+          $scope.allPage = data.allRows % 6 == 0 ? data.allRows / 6 : parseInt(data.allRows / 6) + 1;
+        })
+      }
+      $scope.search = function () {
+        var formData = JSON.stringify($(".searchForm").serializeObject());
+        $scope.currPage = 1;
+        $(".pagination .active").removeClass("active");
+        $(".pagination .previous").next().addClass("active");
+        console.log(formData);
+
+        $http({
+          method: "post",
+          data: formData,
           url: "orders/select"
         }).success(function (data) {
-          if(data.state=="false"){
-              window.location.href='login.html';
-            }
+          if (data.state == "false") {
+            window.location.href = 'login.html';
+          }
           console.log(data);
           $scope.orders = data.list;
           $scope.allPage = data.allRows % 6 == 0 ? data.allRows / 6 : parseInt(data.allRows / 6) + 1;
           $(".input_where").val("");
         });
       }
-      $scope.orderBtn = function(order){
-        
-        function copy(obj){
-            var newobj = {};
-            for ( var attr in obj) {
-                newobj[attr] = obj[attr];
-            }
-            return newobj;
+      $scope.orderBtn = function (order) {
+
+        function copy(obj) {
+          var newobj = {};
+          for (var attr in obj) {
+            newobj[attr] = obj[attr];
+          }
+          return newobj;
         }
         var o = copy(order);
-        var osData ="";
-        if(order.status==1){
-          if(!confirm("确认发货？"))return;
+        var osData = "";
+        if (order.status == 1) {
+          if (!confirm("确认发货？")) return;
           var info = prompt("输入运单号");
           var comment = prompt("输入快递公司");
-          if(info=="" || comment==""){
+          if (info == "" || comment == "") {
             alert("信息不完整，请重新发货");
             return;
           }
           var os = {
-            info:info,
-            comments :comment
+            info: info,
+            comments: comment
           }
           osData = JSON.stringify(os);
           o.status = 2;
-        }else if(order.status==4){
-          if(!confirm("确认退款"+o.nowamount +"元?"))return;
+        } else if (order.status == 4) {
+          if (!confirm("确认退款" + o.nowamount + "元?")) return;
           var info = prompt("输入取消原因");
-          if(info==""){
+          if (info == "") {
             alert("信息不完整，请重新发货");
             return;
           }
           var os = {
-            info:info,
-            amount :o.nowamount
+            info: info,
+            amount: o.nowamount
           }
           osData = JSON.stringify(os);
           $("#myModalLabel").text("新增");
@@ -1019,43 +1214,268 @@
         }
         var data = JSON.stringify(o);
         $http({
-          method:"POST",
-          url:"orders/delivery",
-          data:{
-            "data":data,
-            "os":osData
+          method: "POST",
+          url: "orders/delivery",
+          data: {
+            "data": data,
+            "os": osData
           }
-        }).success(function(data){
-          if(data.state=="false"){
-               window.location.href='login.html';
-            }
-          if(data.state == "ok"){
+        }).success(function (data) {
+          if (data.state == "false") {
+            window.location.href = 'login.html';
+          }
+          if (data.state == "ok") {
             order.status = data.code;
-          }else{
+          } else {
             alert("失败");
           }
         })
       }
+      $scope.show = function (width, height, title, url) {
+        var offset = "t";
+        if ($scope.queryType == "alertStatus") {
+          offset = "auto";
+        }
+        layui.use('layer', function () {
+          var layer = layui.layer;
+          layer.open({
+            type: 1
+            , area: [width + 'px', height + 'px']
+            , title: title
+            , shade: 0.3
+            , offset: offset
+            , maxmin: true
+            , anim: -1
+            , content: ""
+            , scrollbar: false
+            , cancel: function (layero, index) {
+              $(layero[0]).remove();
+            }
+            , success: function (layero, index) {
+              // console.log(layero);
+              $http({
+                method: 'get',
+                url: url,
+              }).
+                success(function (data) {
+                  if (data.state == "false") {
+                    window.location.href = 'login.html';
+                  }
+                  var linkFn = $compile(data);
+                  var element = linkFn($scope);
+                  $scope.element = element;
+                  var layerContent = $(layero[0]).find(".layui-layer-content");
+                  layerContent.html($scope.element);
+                 
+                })
+            }
+
+          });
+        });
+      }
+      $scope.next = function () {
+        if ((parseInt($scope.currPage) + 1) <= $scope.allPage) {
+          var active = $(".pagination .active");
+          $scope.currPage = parseInt($scope.currPage) + 1;
+          $scope.getOrders($scope.currPage);
+          var nextBtn = $(".pagination .next");
+          var cmaxPage = nextBtn.prev().find("a").html();
+          if (cmaxPage < $scope.allPage) {
+            $(".pagination li a").each(function () {
+              var content = $(this).html();
+              if (content == "上一页" || content == "下一页") return true;
+              $(this).html(parseInt($(this).html()) + 1);
+            })
+          }
+          if (active.next().find("a").html() == "下一页") return;
+          active.removeClass("active");
+          active.next().addClass("active");
+
+        }
+      }
+      $scope.prev = function () {
+        if (($scope.currPage - 1) >= 1) {
+          var active = $(".pagination .active");
+          $scope.currPage = $scope.currPage - 1;
+          $scope.getOrders($scope.currPage);
+          var prevBtn = $(".pagination .previous");
+          var cminPage = prevBtn.next().find("a").html();
+          if (cminPage > 1) {
+            $(".pagination li a").each(function () {
+              var content = $(this).html();
+              if (content == "上一页" || content == "下一页") return true;
+              $(this).html(parseInt($(this).html()) - 1);
+            })
+          }
+          if (active.prev().find("a").html() == "上一页") return;
+          active.removeClass("active");
+          active.prev().addClass("active");
+        }
+      }
+      $scope.pageBtn = function (event) {
+        $(event.target).parent().siblings(".active").removeClass("active");
+        $(event.target).parent().addClass("active");
+        $scope.currPage = $(event.target).html();
+        $scope.getOrders($scope.currPage);
+        var prevBtn = $(".pagination .previous");
+        var cminPage = prevBtn.next().find("a").html();
+        if (cminPage > 2) {
+          console.log("-2");
+          $(".pagination li a").each(function () {
+            var content = $(this).html();
+            if (content == "下一页" || content == "上一页") return true;
+            $(this).html(parseInt($(this).html()) - 2);
+          })
+        }
+        var nextBtn = $(".pagination .next");
+        var cmaxPage = nextBtn.prev().find("a").html();
+        if (cmaxPage < ($scope.allPage - 1)) {
+          console.log("+2");
+          $(".pagination li a").each(function () {
+            var content = $(this).html();
+            if (content == "下一页" || content == "上一页") return true;
+            $(this).html(parseInt($(this).html()) + 2);
+          })
+        }
+      }
+
+
+     
+      $scope.showOrderDetails = function(order){
+        $scope.currOrder = order;
+        $scope.show(1000,400,"订单详情","orders/orderDetail.jsp");
+        $http({
+          method:"post",
+          url:"orders/orderDetails?id="+order.id
+        }).success(function(data){
+          $scope.orderDetails = data;
+          console.log($scope.orderDetails);
+          $scope.$apply();
+        })
+      }
+     
       $scope.getOrders();
       $scope.getOStatus();
     }])
-  
-  
+
+    jdShop.controller("profileController", ["$scope", "$http", "$compile", function ($scope, $http, $compile) {
+
+    }])
+    $(document).on("click", ".alterPass", function () {
+      console.log("修改");
+      var content = "<div class=' row' style='margin-top:10px;margin-bottom:10px;'>"
+        + "   <label style='margin-top:10px;' class='control-label col-md-3 col-sm-3 col-xs-12' >输入密码"
+        + "   </label>"
+        + "   <div class=' col-md-7 col-sm-7  ' style='margin-top: 5px;border-radius: 3px' >"
+        + "       <input type='password' name='pass'    required='required'"
+        + "       class='form-control col-md-7 col-xs-12'>"
+        + "       <input type='hidden' value=<%=id%> class='userid' name='userid'>"
+        + "   </div>"
+        + "</div>"
+        + "<div class=' row' style='margin-top:10px;margin-bottom:10px;'>"
+        + "   <label style='margin-top:10px;' class='control-label col-md-3 col-sm-3 col-xs-12' >新密码"
+        + "   </label>"
+        + "   <div class=' col-md-7 col-sm-7  ' style='margin-top: 5px;border-radius: 3px' >"
+        + "       <input type='password' name='newPass'   required='required'"
+        + "       class='form-control col-md-7 col-xs-12'>"
+        + "   </div>"
+        + "</div>"
+        + "<div class=' row' style='margin-top:10px;margin-bottom:10px;'>"
+        + "   <label style='margin-top:10px;' class='control-label col-md-3 col-sm-3 col-xs-12' >确认密码"
+        + "   </label>"
+        + "   <div class=' col-md-7 col-sm-7  ' style='margin-top: 5px;border-radius: 3px' >"
+        + "       <input type='password' name='newPass2'   required='required'"
+        + "       class='form-control col-md-7 col-xs-12'>"
+        + "   </div>"
+        + "</div>"
+        + "<div class='row'><div class='col-md-6 col-sm-6 col-xs-12 col-md-offset-3'>"
+        + "<button class='btn btn-success alterPassBtn' >修改</button>"
+        + "</div></div>"
+
+      layui.use('layer', function () {
+        var layer = layui.layer;
+        layer.open({
+          type: 1
+          , area: ['300px', '250px']
+          , title: "修改密码"
+          , shade: 0
+          , offset: 'auto'
+          , maxmin: true
+          , anim: -1
+          , content: content
+          , cancel: function (layero, index) {
+            $(layero[0]).remove();
+          }
+          , success: function (layero, index) {
+            // console.log(layero);
+
+          }
+
+        });
+      })
+    })
+    $(document).on("click", ".alterPassBtn", function () {
+      // var id = $(this).parents(".layui-layer-content").find(".userid").val();
+      var pass = $(this).parents(".layui-layer-content").find("input[name='pass']").val();
+      var newPass = $(this).parents(".layui-layer-content").find("input[name='newPass']").val();
+      var newPass2 = $(this).parents(".layui-layer-content").find("input[name='newPass2']").val();
+      if (newPass != newPass2) {
+        alert("两次密码不一致");
+        return;
+      }
+      var win = $(this).parents(".layui-layer");
+      $.post("operator/altPas", {
+        pass: pass,
+        newPass: newPass
+      }, function (data) {
+        if (data.state == "false") {
+          window.location.href = 'login.html';
+        }
+        if (data.rs == "ok") {
+          win.remove();
+          alert("修改成功");
+        } else {
+          alert("修改失败");
+        }
+      }, "json")
+
+      // $http({
+      //   method: "post",
+      //   data: {
+      //     pass:pass,
+      //     newPass:newPass
+      //   },
+      //   url: "operator/altPas"
+      // }).success(function (data) {
+      //   if(data.state=="false"){ 
+      //       window.location.href='login.html';
+      //   }
+      //   if(data.rs=="ok"){
+      //     alert("修改成功");
+      //   }else{
+      //     alert("修改失败");
+      //   }
+      // });
+    })
     $(document).on("change", ".select_searchType", function () {
-      var option = $(this).find("option").eq($(this).val()-1);
+      var val = $(this).val();
+      var option;
+      $(this).find("option").each(function () {
+        if ($(this).val() == val) option = $(this);
+      })
       var role = option.attr("c-role");
       console.log(role);
-      if(typeof(role)=="undefined"){
+      if (typeof (role) == "undefined") {
         $(this).siblings().removeAttr("name");
         $(this).siblings().hide();
-        $(this).next().attr("name", "where").show();
-      }else{
-        $(this).next().removeAttr("name").hide();
-        $(this).siblings("."+role).attr("name", "where");
-        $(this).siblings("."+role).removeClass("hidden");
-        $(this).siblings("."+role).show();
+        $(this).siblings("input.input_where").attr("name", "where").show();
+      } else {
+        $(this).siblings().removeAttr("name").hide();
+        $(this).siblings("." + role).attr("name", "where");
+        $(this).siblings("." + role).removeClass("hidden");
+        $(this).siblings("." + role).show();
       }
-    
+
     })
   // </script>
   <!-- <%@include file="static/js/index_js.jsp" %> -->

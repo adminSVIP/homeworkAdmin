@@ -6,7 +6,7 @@ public class Operator {
 	public static String[] statuses = {"ÔÚÖ°","Çë¼Ù","ÀëÖ°"};
 	private int id;
 	private String nike;
-	private String password;
+	private String password="123";
 	private String name;
 	private int sex;
 	private String tel;

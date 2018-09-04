@@ -7,7 +7,7 @@
             <ul class="nav navbar-right panel_toolbox">
                 
                 <li style="margin-right: 20px;">
-                    
+                     
                     <select class="select_searchType" name="searchType" >
                         <option value="1">姓名</option>
                         <option value="2">昵称</option>
@@ -17,10 +17,11 @@
                     <select class="select_status hidden" >
                         <option value={{$index+1}} ng-repeat="state in status track by $index">{{state}}</option>
                     </select>
-                    <li class="text-info" ng-click="search()" style="margin-right: 20px;font-size: 20px;">
-                        <i class="fa fa-search"></i>搜索
-                    </li>
                     
+                    
+                </li>
+                <li class="text-info" ng-click="search()" style="margin-right: 20px;font-size: 20px;">
+                    <i class="fa fa-search"></i>搜索
                 </li>
                 <li class="text-success" ng-click="addOperator()" style="font-size: 20px;">
                     <i class="fa fa-plus-circle"></i>添加
@@ -68,14 +69,16 @@
                             <td class=" " ng-if="operator.sex == 0">女</td>
                             <td class=" " ng-if="operator.sex == 1">男</td>
                             <td class=" ">{{operator.tel}}</td>
-                            <td class=" ">{{operator.power}}</td>
+                            <td class=" " ng-if='operator.power==1'>操作员</td>
+                            <td class=" " ng-if='operator.power==2'>管理员</td>
                             <td class="a-right a-right " ng-if="$index+1 == operator.status" ng-repeat="state in status track by $index">
                                 {{state}}
                             </td>
                             <td class="a-right a-right ">{{operator.comments}}</td>
                             <td class=" last">
-                                <span class="pointer text-success" ng-click="alterOperator(operator)"><i class="fa fa-pencil "></i>编辑</span>
-                                <span style="margin-left: 20px;" class="pointer text-danger"><i class="fa fa-close"></i>删除</span>
+                                <span class="pointer text-success" ng-click="alterOperator(operator)"><i class="fa fa-pencil "></i>编辑信息</span>
+                                <span style="margin-left: 20px;" ng-click="alterStatus(operator)"  class="pointer text-danger"><i class="fa fa-pencil "></i>修改状态</span>
+                                <span style="margin-left: 20px;" ng-click="resetPass(operator)"  class="pointer text-danger"><i class="fa fa-pencil "></i>重置密码</span>
                             </td> 
                         </tr>
                     </tbody>

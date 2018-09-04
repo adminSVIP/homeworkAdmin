@@ -7,24 +7,19 @@
             <ul class="nav navbar-right panel_toolbox">
                 
                 <li style="margin-right: 20px;">
-                    
-                    <select class="select_searchType" name="searchType" >
-                        <option value="1">姓名</option>
-                        <option value="2">昵称</option>
-                        <option value="3">状态</option>
+                    <select class="select_searchType" name="searchType">
+                        <option value="1">商品名称</option>
+                        <option value="2">用户id</option>
                     </select>
                     <input type="text" class="input_where" name="where">
-                    <select class="select_status hidden" >
-                        <option value={{$index+1}} ng-repeat="state in status track by $index">{{state}}</option>
-                    </select>
-                    <li class="text-info" ng-click="search()" style="margin-right: 20px;font-size: 20px;">
-                        <i class="fa fa-search"></i>搜索
-                    </li>
                     
                 </li>
-                <li class="text-success" ng-click="addOperator()" style="font-size: 20px;">
-                    <i class="fa fa-plus-circle"></i>添加
+
+               
+                <li class="text-info" ng-click="search()" style="margin-right: 20px;font-size: 20px;">
+                    <i class="fa fa-search"></i>搜索
                 </li>
+                
                
             </ul>
             </form>
@@ -43,6 +38,8 @@
                             
                             <th class="column-title">用户id</th>
                             <th class="column-title">商品id</th>
+                            <th class="column-title">商品名称</th>
+                            <th class="column-title">商品图片</th>
                             <th class="column-title">数量</th>
                            
                             <!-- <th class="column-title no-link last">
@@ -62,6 +59,10 @@
                             
                             <td class=" ">{{shopcar.user_id}}</td>
                             <td class=" ">{{shopcar.product_id}}</td>
+                            <td class=" ">{{shopcar.fullname}}</td>
+                            <td class=" ">
+                                <img src="{{shopcar.pic}}" width="40px" height="40px" alt="">
+                            </td>
                             <td class=" ">{{shopcar.count}}</td>
                             
                             <!-- <td class=" last">

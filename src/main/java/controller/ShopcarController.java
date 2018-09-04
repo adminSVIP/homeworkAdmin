@@ -28,14 +28,13 @@ public class ShopcarController {
 	
 	@RequestMapping("index")
 	@ResponseBody
-	public Map<String,Object> select(@RequestBody(required=false) SearchInfo searchInfo,Integer pageno,HttpServletRequest req){
+	public Map<String,Object> select(@RequestBody(required=false) ShopcarSearchInfo searchInfo,Integer pageno,HttpServletRequest req){
 		if(pageno == null) pageno = 1;
 		HttpSession session = req.getSession();
 		if(searchInfo == null) {
-			searchInfo = (SearchInfo) session.getAttribute("shopcarsearchInfo");
-			if(searchInfo == null) searchInfo = new SearchInfo();
+			searchInfo = (ShopcarSearchInfo) session.getAttribute("shopcarsearchInfo");
+			if(searchInfo == null) searchInfo = new ShopcarSearchInfo();
 		}
-		searchInfo.setSearchOperator(false);
 		session.setAttribute("shopcarsearchInfo", searchInfo);
 //		System.out.println(searchInfo+":"+pageno);
 		searchInfo.setFlag(false);

@@ -37,14 +37,13 @@ public class ProductSearchInfo {
 	public String getWhere() {
 		switch (searchType) {
 		case 1:
-			if(where == null || where.trim().length() == 0) return "";
 			return " where type_id = "+ where;
 		case 2:
-			if(where == null || where.trim().length() == 0) return "";
 			return " where id = "+ where;
 		case 3:
-			if(where == null || where.trim().length() == 0) return "";
 			return " where fullname like '%"+ where +"%' ";
+		case 4:
+			return " where status = "+ where;
 		default: 
 			return "";
 		}

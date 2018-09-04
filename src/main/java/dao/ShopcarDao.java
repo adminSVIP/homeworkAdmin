@@ -20,7 +20,7 @@ import entity.ShopcarSearchInfo;
 public interface ShopcarDao {
 	
 	@Select("select * from shopcar ${where} ${limit}")
-	public List<Shopcar> select(SearchInfo searchInfo);
+	public List<HashMap<String,Object>> select(ShopcarSearchInfo searchInfo);
  
 	@Insert("insert into shopcar (user_id,product_id,count) values(#{user_id},#{product_id},#{count})")
 	public int insert(Shopcar shopcar);

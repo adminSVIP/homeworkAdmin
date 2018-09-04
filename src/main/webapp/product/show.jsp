@@ -1,26 +1,27 @@
 <%@page pageEncoding="utf-8" %>
-<div class="col-md-12 col-sm-12 col-xs-12" style="min-height: 537px;">
+    <div class="col-md-12 col-sm-12 col-xs-12" style="min-height: 537px;">
         <div class="x_panel " style="min-height: 100%;">
             <div class="x_title">
                 <h2>商品管理</h2>
-                <form class="searchForm">
+                <form class="searchForm"> 
                     <ul class="nav navbar-right panel_toolbox">
-
                         <li style="margin-right: 20px;">
-
                             <select class="select_searchType" name="searchType">
-                                <option value="1">姓名</option>
-                                <option value="2">昵称</option>
-                                <option value="3">状态</option>
+                                <option value="3">商品名称</option>
+                                <option value="1" c-role='select_type'>类型</option>
+                                <option value="4" c-role='select_status'>状态</option>
                             </select>
                             <input type="text" class="input_where" name="where">
                             <select class="select_status hidden">
-                                <option value={{$index+1}} ng-repeat="state in status track by $index">{{state}}</option>
+                                <option value={{$index+1}} ng-repeat="state in pStatuses track by $index">{{state}}</option>
                             </select>
-                            <li class="text-info" ng-click="search()" style="margin-right: 20px;font-size: 20px;">
-                                <i class="fa fa-search"></i>搜索
-                            </li>
+                            <select class="select_type hidden">
+                                <option value={{type.id}} ng-repeat="type in allTypes">{{type.name}}</option>
+                            </select>
+                        </li>
 
+                        <li class="text-info" ng-click="search()" style="margin-right: 20px;font-size: 20px;">
+                            <i class="fa fa-search"></i>搜索
                         </li>
                         <li class="text-success" ng-click="addProducts()" style="font-size: 20px;">
                             <i class="fa fa-plus-circle"></i>添加
@@ -42,6 +43,7 @@
                             <tr class="headings">
 
                                 <th class="column-title">商品名称</th>
+                                <th class="column-title">商品图片</th>
                                 <th class="column-title">类型</th>
                                 <th class="column-title">活动</th>
                                 <th class="column-title">提示信息</th>
@@ -70,7 +72,12 @@
                             <tr ng-repeat="product in products track by $index ">
 
                                 <td class=" ">{{product.fullname }}</td>
-                                <td class=" ">{{product.type_id }}</td>
+                                <td class=" ">
+                                    <img src="{{product.pic}}" width="40px" height="40px" alt="">
+                                </td>
+                                <td ng-repeat='type in allTypes' ng-if='type.id==product.type_id' class=" ">
+                                    {{type.name}}
+                                </td>
                                 <td class=" ">{{product.activity }}</td>
                                 <td class=" ">{{product.tip}}</td>
                                 <td class=" ">{{product.sale}}</td>
@@ -78,7 +85,9 @@
                                 <td class=" ">{{product.price}}</td>
                                 <td class=" ">{{product.nowprice}}</td>
                                 <td class=" ">{{product.priority }}</td>
-                                <td class=" ">{{product.status }}</td>
+                                <td ng-repeat='state in pStatuses track by $index' ng-if='product.status==$index+1' class=" ">
+                                    {{state}}
+                                </td>
                                 <td class=" ">{{product.salecount }}</td>
                                 <td class=" ">{{product.collectcount }}</td>
                                 <!-- <td class="a-right a-right " ng-if="$index+1 == operator.status" ng-repeat="state in status track by $index">
@@ -136,4 +145,4 @@
 
             </div>
         </div>
-</div>
+    </div>

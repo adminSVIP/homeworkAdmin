@@ -19,15 +19,15 @@ public interface OperatorDao {
 	public List<Operator> select(SearchInfo searchInfo);
 	
 	@Insert("insert into operator(nike,password,name,sex,tel,power,status,comments) "
-			+ "values(#{nike},'123456',#{name},#{sex},"
+			+ "values(#{nike},#{md5Pass},#{name},#{sex},"
 			+ "#{tel},#{power},#{status},#{comments})")
 	public int insert( Operator operator);
 	
 	@Update("update operator set nike = #{nike} , "
 			+ "name=#{name},sex=#{sex},"
 			+ "tel = #{tel},power = #{power}, status = #{status},"
-			+ "comments = #{comments} ,password = #{password}"
-			+ " where id = #{id} ")
+			+ "comments = #{comments} ,password = #{md5Pass}"
+			+ " where id = #{id} ") 
 	public int update(Operator operator);
 	
 	@Update("update operator set status = 3  where  id = #{id} ")
