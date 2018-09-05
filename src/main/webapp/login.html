@@ -24,7 +24,6 @@
   <link href="build/css/custom.min.css" rel="stylesheet">
 
 </head>
-
 <body class="login">
   <div>
     <a class="hiddenanchor" id="signup"></a>
@@ -42,6 +41,16 @@
               <input type="password" class="form-control" name="password" placeholder="密码" required="required" />
             </div>
             <div>
+              <input type="text" class="form-control col-md-3" name="code"  placeholder="验证码" >
+              <label style="line-height: 30px" class="col-md-3" >验证码</label>
+              <span  style="cursor:pointer" class="col-md-4 span_randImg">
+                <img width="120px" height="30px" src="image" alt="">
+              </span>
+              <span class="col-md-5 "style="line-height: 30px;cursor:pointer" >看不清,点击更换</span>
+
+
+            </div>
+            <div style="clear:both ; margin-top: 20px;" >
               <!-- <a class="btn btn-default submit" >登陆</a> -->
               <div class="btn btn-default submit">登陆</div>
               <!-- <a class="reset_pass" href="#">忘记密码?</a> -->
@@ -107,13 +116,14 @@
 </body>
 <script>
   $(function () {
-
+    var s =0;
     $("div.submit").click(function () {
       var nike = $("input[name='nike']").val();
       var password = $("input[name='password']").val();
+      var code = $("input[name='code']").val();
       if (nike == "" || password == "") return;
       $.ajax({
-        url: "loginxx",
+        url: "loginxx?code="+code,
         type: "POST",
         data: '{"nike":"' + nike + '","password":"' + password + '"}',
         contentType: "application/json;charset=utf-8",
@@ -122,12 +132,22 @@
           if(data.state == "ok"){
             window.location.href='index.jsp';
           }else{
-            alert("登陆失败");
+            if(data.code=="1"){
+              alert("验证码错误");
+            }else{
+              alert("用户名密码错误");
+            }
+            s= s+1;
+            $(".span_randImg").html("<img width='120px' height='30px' src='image?s="+s+"'>");
           }
         }
       });
     })
+    $(document).on("click",".span_randImg",function(){
+      s= s+1;
+      $(this).html("<img width='120px' height='30px' src='image?s="+s+"'>");
 
+    })
   })
 </script>
 

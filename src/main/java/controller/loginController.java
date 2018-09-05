@@ -26,13 +26,18 @@ public class loginController {
 	
 	@RequestMapping("loginxx")
 	@ResponseBody
-	public String index(@RequestBody Operator operator,HttpServletRequest req) {
+	public String index(@RequestBody Operator operator,String code,HttpServletRequest req) {
+		String scode = req.getSession().getAttribute("randomCode").toString();
+		if(!code.equalsIgnoreCase(scode)) {
+			return "{\"state\":\"false\",\"code\":\"1\"}";
+		}
+		
 		List<Operator> list = operatorService.canLogin(operator);
 		if(list.size()>0) {
 			req.getSession().setAttribute("user", list.get(0));
 			return "{\"state\":\"ok\"}";
 		}else { 
-			return "{\"state\":\"false\"}";
+			return "{\"state\":\"false\",\"code\":\"2\"}";
 		}
 		
 		

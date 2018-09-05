@@ -35,7 +35,7 @@ public class LoginFilter implements Filter {
 			if(url.matches("[a-zA-Z/]*address/setUse"))return true;
 			if(url.matches("[a-zA-Z/]*orders/userOrders"))return true;
 			if(url.matches("[a-zA-Z/]*orders/recivePackage"))return true;
-			
+			if(url.matches("[a-zA-Z/]*image"))return true;
 			if (url.endsWith(ignore)) return true;
 		}
 		return false;
