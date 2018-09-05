@@ -50,7 +50,11 @@ public class OrdersController {
 			if(searchInfo == null) searchInfo = new OrdersSearchInfo();
 		}
 		session.setAttribute("OrdersSearchInfo", searchInfo);
-		searchInfo.setFlag(false);
+		searchInfo.setFlag(true);
+		Object o = req.getSession().getAttribute("user");
+		if(o instanceof Operator) {
+			searchInfo.setFlag(false);
+		}
 		searchInfo.setPageno(pageno.intValue());
 		List list = ordersService.select(searchInfo); 
 		searchInfo.setFlag(true);

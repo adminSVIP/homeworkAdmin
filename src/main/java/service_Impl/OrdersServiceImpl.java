@@ -38,7 +38,13 @@ public class OrdersServiceImpl implements OrdersService {
 	}
 
 	public List<HashMap<String, Object>> userOrdersDetails(int id) {
-		return ordersDao.userOrdersDetails(id);
+		List list = ordersDao.userOrdersDetails(id);
+		if(list.size()>0) {
+			return list;
+		}else {
+			
+			return ordersDao.userOrdersDetails2(id);
+		}
 	}
 
 }

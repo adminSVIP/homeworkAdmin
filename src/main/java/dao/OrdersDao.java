@@ -59,5 +59,15 @@ public interface OrdersDao {
 			+ " where os.dest_status=2 and o.id = #{id}")
 	public List<HashMap<String,Object>> userOrdersDetails(int id);
 	
+	@Select("select o.id ,o.date,o.code,o.amount,o.`status`,p.fullname,p.price,od.count,os.comments,os.info"
+			+ " ,a.addr,a.zone"
+			+ " from "
+			+ " orders o join oredrs_details od on(o.id=od.orders_id)"
+			+ " join product p on(p.id=od.product_id)"
+			+ " join orders_status os on(o.id = os.orders_id)"
+			+ " join address a on(a.id=o.address_id)"
+			+ " where os.dest_status=1 and o.id = #{id}")
+	public List<HashMap<String,Object>> userOrdersDetails2(int id);
+	
 	
 }

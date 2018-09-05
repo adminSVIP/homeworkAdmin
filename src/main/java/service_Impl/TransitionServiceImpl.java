@@ -1,5 +1,6 @@
 package service_Impl;
 
+import java.io.Console;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -71,11 +72,13 @@ public class TransitionServiceImpl implements MyTranstionService {
 		} catch (Exception e) {
 			throw new RuntimeException();
 		}
-		
-		
-		ShopcarSearchInfo shopcarSearchInfo = new ShopcarSearchInfo();
-		shopcarSearchInfo.setWhere(payShopcarIds);
-		shopcarDao.delete(shopcarSearchInfo);
+		System.out.println(payShopcarIds);
+		if(payShopcarIds!=null&&(!payShopcarIds.trim().equals(""))) {
+			System.out.println("É¾³ý");
+			ShopcarSearchInfo shopcarSearchInfo = new ShopcarSearchInfo();
+			shopcarSearchInfo.setWhere(payShopcarIds);
+			shopcarDao.delete(shopcarSearchInfo);
+		}
 		
 		for(int i = 0 ; i < detailList.size() ; i++) {
 			String code = "order"+System.currentTimeMillis();
@@ -83,8 +86,8 @@ public class TransitionServiceImpl implements MyTranstionService {
 			
 			
 			orders.setCode(code);
-			orders.setAmount(orders_detail.getPrice());
-			orders.setNowamount(orders_detail.getNowprice());
+//			orders.setAmount(orders_detail.getPrice());
+//			orders.setNowamount(orders_detail.getNowprice());
 			ordersDao.insert(orders);
 			int lastId = ordersDao.lastID();
 			lastId = ordersDao.lastID();

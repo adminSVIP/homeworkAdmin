@@ -32,8 +32,10 @@
 
                 <span class="dr col-md-4 pull-right"></span>
                 <form class="form-horizontal form-label-left  pull-left col-md-6 ">
-
                     <input type='hidden' name='id' value="{{currProducts.id}}" />
+                    <input type='hidden' ng-if='pqueryType=="update"' name='salecount' value="{{currProducts.salecount}}" />
+                    <input type='hidden' ng-if='pqueryType=="update"' name='collectcount' value="{{currProducts.collectcount}}" />
+                    
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-pType">商品类型
                             <span class="required">*</span>

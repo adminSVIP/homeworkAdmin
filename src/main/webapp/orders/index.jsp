@@ -84,6 +84,9 @@
                             <td class=" ">{{order.comments}}</td>
 
                             <td class=" last">
+                            	<span ng-if='order.status==3&&order.assessstatus==1'>已评价</span>
+                            	<span ng-if='order.status==2'>已发货</span>
+                				<span ng-if='order.status==5'>已退款</span>
                                 <button ng-if="order.status==1" ng-click="orderBtn(order)" type="button" class="btn btn-info btn-xs">
                                     <font style="vertical-align: inherit;">
                                         <font style="vertical-align: inherit;">发货</font>

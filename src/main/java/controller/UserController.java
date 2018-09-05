@@ -64,6 +64,7 @@ public class UserController {
 	public String insert(@RequestBody(required=true) User user,HttpServletRequest req,HttpServletResponse response) {
 		
 		int rsRow = userService.insert(user);
+		System.out.println(user.getEmail()+":"+user.getNike());
 		if(rsRow>0) {
 			req.getSession().setAttribute("user", user);
 			return "{\"state\":\"ok\"}";

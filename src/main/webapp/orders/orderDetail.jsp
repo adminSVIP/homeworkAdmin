@@ -35,8 +35,8 @@
                     <td class=" ">{{detail.amount}}</td>
                     <td class=" ">{{detail.info}}</td>
                     <td class=" ">{{detail.comments}}</td>
-                    <td ng-repeat='state in oStatuses track by $index' ng-if='detail.status==$index+1' class=" ">
-                        {{state}}
+                    <td ng-repeat='state in oStatuses track by $index' ng-if='detail.status==$index' class=" ">
+                       {{state}}
                     </td>
                     <td class=" ">{{detail.zone}}/{{detail.addr}}</td>
                     

@@ -485,8 +485,11 @@
             if (data.state == "false") {
               window.location.href = 'login.html';
             }
+            
             if (data.rs > 0) {
               $(".layui-layer-page").remove();
+              $(".layui-layer-shade").remove();
+              // $("input.dz-hidden-input").remove();
               $scope.getOperators();
             } else {
               alert("失败");
