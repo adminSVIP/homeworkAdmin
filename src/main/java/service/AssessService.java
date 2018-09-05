@@ -13,4 +13,6 @@ public interface AssessService {
 	public int update(Assess assess);
 
 	public int delete(int id);
+	
+	public  List<Assess> assessOfProduct(int id);
 }

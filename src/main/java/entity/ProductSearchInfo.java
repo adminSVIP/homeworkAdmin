@@ -1,7 +1,7 @@
 package entity;
 
 public class ProductSearchInfo {
-	private int max = 6;
+	private int max = 5;
 	private String where;
 	private int pageno = 1;
 	private String limit;

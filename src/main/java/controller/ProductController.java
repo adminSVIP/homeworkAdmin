@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import entity.Assess;
 import entity.Product;
 import entity.ProductSearchInfo;
+import service.AssessService;
 import service.ProductService;
 
 @Controller
@@ -24,6 +26,9 @@ public class ProductController {
 	
 	@Autowired
 	ProductService productService;
+	@Autowired
+	AssessService assessService;
+	
 	
 	@RequestMapping("select")
 	@ResponseBody
@@ -35,13 +40,8 @@ public class ProductController {
 		if(pageno == null) pageno = 1;
 		HttpSession session = req.getSession();
 		if(productSearchInfo == null) {
-//			productSearchInfo = (ProductSearchInfo) session.getAttribute("productSearchInfo");
-//			if(productSearchInfo == null) productSearchInfo = new ProductSearchInfo();
 			productSearchInfo = new ProductSearchInfo();
 		}
-		System.out.println(productSearchInfo.getWhere());
-//		session.setAttribute("productSearchInfo", productSearchInfo);
-//		System.out.println(searchInfo+":"+pageno);
 		productSearchInfo.setFlag(false);
 		productSearchInfo.setPageno(pageno.intValue());
 		List list = productService.select(productSearchInfo); 
@@ -65,6 +65,13 @@ public class ProductController {
 	public String insert(@RequestBody(required=true) Product product) {
 		int rsRow = productService.insert(product);
 		return "{\"rs\":\""+ rsRow +"\"}";
+	}
+	
+	@RequestMapping("assessOfProduct")
+	@ResponseBody
+	public List<Assess> assessOfProduct(int id) {
+		
+		return assessService.assessOfProduct(id);
 	}
 	
 	@RequestMapping("update")

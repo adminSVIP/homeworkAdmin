@@ -597,6 +597,7 @@
       $scope.currProducts = null;
       $scope.pStatuses;
       $scope.pics = [];
+      $scope.pics2 = [];
       $scope.pqueryType;
       $scope.getPStatus = function () {
         $http({
@@ -628,7 +629,7 @@
             var value = element.pics.split(",")[0];
             element[key] = value;
           });
-          $scope.allPage = data.allRows % 6 == 0 ? data.allRows / 6 : parseInt(data.allRows / 6) + 1;
+          $scope.allPage = data.allRows % 5 == 0 ? data.allRows / 5 : parseInt(data.allRows / 5) + 1;
         });
       }
       $scope.show = function (width, height, title, url) {
@@ -665,12 +666,12 @@
                     console.log($scope.pics);
                     // data-dz-thumbnail
                     var html = "<div class='col-md-12 pull-right'>";
-                    if($scope.pics.length==0){
+                    if($scope.pics2.length==0){
                       html = html +"<h1>没有上传图片</h1>";
                     }else{
                       html = html +"<h3>上传的图片</h3>";
-                      for(var i = 0 ;i<$scope.pics.length;i++){
-                        html = html +"<img class='col-md-6 well' style='height:130px;'  src='"+ $scope.pics[i] +"'  >";
+                      for(var i = 0 ;i<$scope.pics2.length;i++){
+                        html = html +"<img class='col-md-6 well' style='height:130px;'  src='"+ $scope.pics2[i] +"'  >";
                       }
                     }
                               
@@ -692,6 +693,10 @@
                     dictRemoveFile: "移除文件",
                     init: function () {
                       this.on("success", function (file, data) {
+                    	  console.log($scope.pics.length);
+                    	if($scope.pics.length>=4){
+                    		$scope.pics.shift();
+                    	}
                         $scope.pics.push(data.src);
                         // $scope.pics.splice($.inArray(2, $scope.pics), 1);
                         $(".dz-remove").attr("pic", data.src);
@@ -722,6 +727,7 @@
       }
       $scope.alterProducts = function (o) {
         $scope.currProducts = o;
+        $scope.pics2 = $scope.currProducts.pics.split(",");
         $scope.pics = $scope.currProducts.pics.split(",");
         $scope.pqueryType = "update";
         $scope.show(1080, 600, "编辑商品", 'product/index.jsp');
@@ -746,7 +752,7 @@
             var value = element.pics.split(",")[0];
             element[key] = value;
           });
-          $scope.allPage = data.allRows % 6 == 0 ? data.allRows / 6 : parseInt(data.allRows / 6) + 1;
+          $scope.allPage = data.allRows % 5 == 0 ? data.allRows / 5 : parseInt(data.allRows / 5) + 1;
         });
       }
       $scope.next = function () {

@@ -21,6 +21,7 @@ public class LoginFilter implements Filter {
 		String url = request.getRequestURI();
 		for (String ignore : prefixIignores) {
 			if(url.matches("[a-zA-Z/]*product/select*"))return true;
+			if(url.matches("[a-zA-Z/]*product/assessOfProduct*"))return true;
 			if(url.matches("[a-zA-Z/]*user/select*"))return true;
 			if(url.matches("[a-zA-Z/]*user/login"))return true;
 			if(url.matches("[a-zA-Z/]*user/regist"))return true;
@@ -34,6 +35,7 @@ public class LoginFilter implements Filter {
 			if(url.matches("[a-zA-Z/]*address/setUse"))return true;
 			if(url.matches("[a-zA-Z/]*orders/userOrders"))return true;
 			if(url.matches("[a-zA-Z/]*orders/recivePackage"))return true;
+			
 			if (url.endsWith(ignore)) return true;
 		}
 		return false;

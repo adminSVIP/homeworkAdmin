@@ -1,5 +1,5 @@
 <%@page pageEncoding="utf-8" %>
-    <div class="col-md-12 col-sm-12 col-xs-12" style="min-height: 537px;">
+    <div class="col-md-12 col-sm-12 col-xs-12" style="min-height: 700px;">
         <div class="x_panel " style="min-height: 100%;">
             <div class="x_title">
                 <h2>商品管理</h2>
@@ -32,7 +32,7 @@
                 <div class="clearfix"></div>
             </div>
 
-            <div class="x_content" style="position: relative;min-height: 450px;">
+            <div class="x_content" style="position: relative;min-height: 600px;">
 
                 <!-- <p>Add class
                 <code>bulk_action</code> to table for bulk actions options on row select</p> -->
@@ -71,34 +71,33 @@
                         <tbody>
                             <tr ng-repeat="product in products track by $index ">
 
-                                <td class=" ">{{product.fullname }}</td>
-                                <td class=" ">
+                                <td class="col-md-2">{{product.fullname }}</td>
+                                <td class="col-md-1 ">
                                     <img src="{{product.pic}}" width="40px" height="40px" alt="">
                                 </td>
-                                <td ng-repeat='type in allTypes' ng-if='type.id==product.type_id' class=" ">
+                                <td width=50 ng-repeat='type in allTypes' ng-if='type.id==product.type_id' class=" ">
                                     {{type.name}}
                                 </td>
-                                <td class=" ">{{product.activity }}</td>
-                                <td class=" ">{{product.tip}}</td>
-                                <td class=" ">{{product.sale}}</td>
+                                <td width=80 class=" ">{{product.activity }}</td>
+                                <td width=50 class=" ">{{product.tip}}</td>
+                                <td class="col-md-1">{{product.sale}}</td>
                                 <!-- <td class=" ">{{product.info}}</td> -->
                                 <td class=" ">{{product.price}}</td>
                                 <td class=" ">{{product.nowprice}}</td>
                                 <td class=" ">{{product.priority }}</td>
-                                <td ng-repeat='state in pStatuses track by $index' ng-if='product.status==$index+1' class=" ">
+                                <td width=80 ng-repeat='state in pStatuses track by $index' ng-if='product.status==$index+1' class=" ">
                                     {{state}}
                                 </td>
-                                <td class=" ">{{product.salecount }}</td>
-                                <td class=" ">{{product.collectcount }}</td>
+                                <td width=80 class=" ">{{product.salecount }}</td>
+                                <td width=100 class=" ">{{product.collectcount }}</td>
                                 <!-- <td class="a-right a-right " ng-if="$index+1 == operator.status" ng-repeat="state in status track by $index">
                                     {{state}}
                                 </td> -->
-                                <td class="a-right a-right ">{{product.comments}}</td>
-                                <td class=" last">
+                                <td width=80 class="a-right a-right ">{{product.comments}}</td>
+                                <td class=" last col-md-2">
                                     <span class="pointer text-success" ng-click="alterProducts(product)">
                                         <i class="fa fa-pencil "></i>编辑</span>
-                                    <span style="margin-left: 20px;" class="pointer text-danger">
-                                        <i class="fa fa-close"></i>删除</span>
+                                    
                                 </td>
                             </tr>
                         </tbody>

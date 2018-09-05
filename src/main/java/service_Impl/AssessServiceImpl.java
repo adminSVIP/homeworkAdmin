@@ -30,6 +30,10 @@ public class AssessServiceImpl implements AssessService {
 	public int delete(int id) {
 		return assessDao.delete(id);
 	}
+
+	public List<Assess> assessOfProduct(int id) {
+		return assessDao.assessOfProduct(id);
+	}
 	
 	
 	

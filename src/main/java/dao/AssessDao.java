@@ -29,4 +29,7 @@ public interface AssessDao {
 	
 	@Delete("delete assess where id = #{id}")
 	public int delete(int id);
+	
+	@Select("select * from assess where product_id = #{id}")
+	public  List<Assess> assessOfProduct(int id);
 }
